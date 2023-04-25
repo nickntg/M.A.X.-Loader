@@ -9,7 +9,7 @@ namespace MAXLoader.Core.Services
 	{
 		public short ReadShort(Stream stream)
 		{
-			return Read(stream, 1)[0];
+			return BitConverter.ToInt16(Read(stream, 2));
 		}
 
 		public byte ReadByte(Stream stream)
@@ -24,8 +24,7 @@ namespace MAXLoader.Core.Services
 
 		public uint ReadUInt32(Stream stream)
 		{
-			var b = Read(stream, 2);
-			return BitConverter.ToUInt32(b, 0);
+			return BitConverter.ToUInt32(Read(stream, 4));
 		}
 
 		private static byte[] Read(Stream stream, int size)

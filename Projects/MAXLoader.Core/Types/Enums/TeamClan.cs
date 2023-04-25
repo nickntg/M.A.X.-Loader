@@ -2,9 +2,9 @@
 {
 	public enum TeamClan
 	{
-		TheChosen = 0,
-		CrimsonPath = 1,
-		VonGriffin = 2,
+		TheChosen = 1,
+		CrimsonPath = 2,
+		VonGriffin = 3,
 		AyersHand = 4,
 		Musashi = 5,
 		SacredEights = 6,

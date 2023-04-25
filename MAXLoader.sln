@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAXLoader.Core", "Projects\MAXLoader.Core\MAXLoader.Core.csproj", "{61E39645-A296-4C36-893E-8FD86EEF8555}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MAXLoader.Core", "Projects\MAXLoader.Core\MAXLoader.Core.csproj", "{61E39645-A296-4C36-893E-8FD86EEF8555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAXLoader.Scratch", "Projects\MAXLoader.Scratch\MAXLoader.Scratch.csproj", "{47D6CF34-87E3-403E-A8CF-15A7EB683E2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{61E39645-A296-4C36-893E-8FD86EEF8555}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61E39645-A296-4C36-893E-8FD86EEF8555}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61E39645-A296-4C36-893E-8FD86EEF8555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47D6CF34-87E3-403E-A8CF-15A7EB683E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47D6CF34-87E3-403E-A8CF-15A7EB683E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47D6CF34-87E3-403E-A8CF-15A7EB683E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47D6CF34-87E3-403E-A8CF-15A7EB683E2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

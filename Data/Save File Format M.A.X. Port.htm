@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Save File Format | M.A.X. Port</title>
+<meta name="generator" content="Jekyll v3.9.3">
+<meta property="og:title" content="Save File Format">
+<meta name="author" content="M.A.X. Port Team">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="M.A.X. Port is a runtime executable for the 1996 DOS game M.A.X.: Mechanized Assault &amp; Exploration developed and published by Interplay Productions.">
+<meta property="og:description" content="M.A.X. Port is a runtime executable for the 1996 DOS game M.A.X.: Mechanized Assault &amp; Exploration developed and published by Interplay Productions.">
+<link rel="canonical" href="https://klei1984.github.io/max/save/">
+<meta property="og:url" content="https://klei1984.github.io/max/save/">
+<meta property="og:site_name" content="M.A.X. Port">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Save File Format">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"M.A.X. Port Team"},"description":"M.A.X. Port is a runtime executable for the 1996 DOS game M.A.X.: Mechanized Assault &amp; Exploration developed and published by Interplay Productions.","headline":"Save File Format","url":"https://klei1984.github.io/max/save/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="Save%20File%20Format%20M.A.X.%20Port_files/main.css"><link type="application/atom+xml" rel="alternate" href="https://klei1984.github.io/max/feed.xml" title="M.A.X. Port"><link rel="apple-touch-icon" sizes="180x180" href="https://klei1984.github.io/max/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://klei1984.github.io/max/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://klei1984.github.io/max/assets/images/favicon-16x16.png">
+<link rel="manifest" href="https://klei1984.github.io/max/assets/images/site.webmanifest">
+<link rel="mask-icon" href="https://klei1984.github.io/max/assets/images/safari-pinned-tab.svg" color="#5b5dd5">
+<link rel="shortcut icon" href="https://klei1984.github.io/max/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/max/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff"></head>
+
+
+  <body><header class="site-header" role="banner">
+  <div class="wrapper"><a class="site-title" rel="author" href="https://klei1984.github.io/max/">M.A.X. Port</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <ul class="nav-list">
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/about/">About</a>
+                </li>
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/evolution/">Evolution</a>
+                </li>
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/roadmap/">Roadmap</a>
+                </li><li class="nav-item page-link">
+                  <input type="checkbox" id="nav-item-trigger" class="nav-item-trigger">
+                  <label class="nav-item nav-label" for="nav-item-trigger">Articles</label>
+                  <div class="dropdown-trigger"><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/build/">Build Instructions</a><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/fixdos/">Patching Up MS-DOS Versions</a><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/devenv/">Development Environments</a><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/documentation/">Documentation</a><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/save/">Save File Format</a><a class="dropdown-item nav-link" href="https://klei1984.github.io/max/network/">Networking</a></div>
+                </li>
+              
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/license/">License</a>
+                </li>
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/defects/">Defects</a>
+                </li>
+                <li class="nav-item page-link"><a class="nav-link" href="https://klei1984.github.io/max/download/">Download</a>
+                </li></ul>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Save File Format</h1>
+  </header>
+
+  <div class="post-content">
+    <h2 id="preface">Preface</h2>
+
+<p>The article documents the binary game save file format of M.A.X. v1.04.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>This technical information enables postmortem analysis of certain network game desynchronization issues.</p>
+
+<p>During its development M.A.X. supported two save file formats. There 
+is a human readable format, which is disabled by default, and there is 
+the normal binary format. Unfortunately it seems that the human readable
+ format was not fully maintained at later stages of development and the 
+feature to pretty print enumerated types got stripped from release 
+builds of the game.</p>
+
+<p>With this information it also technically becomes possible to develop
+ a scenario editor for the original game, but certain limitations apply.</p>
+
+<p>Training missions, scenarios and even the campaign games are normal 
+game save files. In theory this means that one can develop additional 
+missions for the game. But unfortunately M.A.X. hardcodes mission goals,
+ or victory and loss conditions, and thus the number of supported 
+scenarios, campaign and training missions.</p>
+
+<p>For example campaign game #2 is lost as soon as the player loses a 
+research center or won as soon as the victory turns limit configured 
+within the save file is reached. One can change the victory turns limit 
+which is 30 turns currently, but there is no way to change the loss 
+condition.</p>
+
+<p>Without reimplementing and externalizing hardcoded missions specific 
+aspects of the game many constraints apply to what kind of missions, 
+scenarios an enthusiast could create in a hypothetical scenario editor.</p>
+
+<p>Nevertheless the first step to do is the specification of the original binary game save file format.</p>
+
+<h2 id="save-file-location">Save File Location</h2>
+
+<p>M.A.X. does not use a conventional folder structure. Basically every 
+installed file is copied into a single installation folder. Assumably 
+this is done to conserve RAM space.</p>
+
+<p>By default the game is installed to <code class="language-plaintext highlighter-rouge">C:\INTRPLAY\MAX</code>, but under DOSBox or similar virtual machines this is not that interesting.</p>
+
+<p>In short, game save files are located at the installation folder where the M.A.X. game executable resides.</p>
+
+<p>A few trivial examples:<br>
+<code class="language-plaintext highlighter-rouge">c:\Program Files (x86)\GOG Galaxy\Games\MAX\</code><br>
+<code class="language-plaintext highlighter-rouge">c:\Program Files (x86)\Steam\steamapps\common\M.A.X. Mechanized Assault &amp; Exploration\max\</code></p>
+
+<h2 id="save-file-format">Save File Format</h2>
+
+<p>The format specification is described as a set of strongly typed 
+basic fields, member fields of structures or arrays that are laid out in
+ a hierarchical manner. This format specification uses ISO C99 basic 
+types wherever possible, but it is important to note that standard 
+alignment rules do not apply, there are no implicit padding bytes or the
+ like. All M.A.X. specific formats use little endian <a href="#ref1">[1]</a> byte order.</p>
+
+<p>The format contains conditional sections, subsections. The signedness of fields and properties are not 100% accurate yet.</p>
+
+<p>ImHex pattern language (<a href="https://klei1984.github.io/max/assets/files/max_v104_saveformat.7z">profile</a>) for M.A.X. save file format v70. Tested with ImHex v1.26.2.</p>
+
+<h3 id="serialized-class-objects">Serialized Class Objects</h3>
+
+<p>The game implements its own class serializer. Each class gets a unique type index called <code class="language-plaintext highlighter-rouge">class_type</code>. Each emitted object gets an item index called <code class="language-plaintext highlighter-rouge">object_index</code>.
+ The item index starts from 1 and regardless of the class being 
+serialized the value is monotonically incremented by one. Pointers to 
+serializable objects found within other serializable objects are not 
+emitted in a special way. Instead of the pointers, the actual objects to
+ where the pointer points gets serialized. This could potentially lead 
+to circular references, but the game handles these corner cases 
+elegantly. The item index that each emitted object gets is used to tell 
+whether the object was already emitted once. If the object item index is
+ bigger than the last emitted object’s item index it means it is not yet
+ saved into the save file so the full object gets dumped to the save 
+file while if the object was already emitted based on its item index 
+only its allocated item index gets written into the file.</p>
+
+<p>The above concepts imply that the class serializer must register supported classes in a specific order so that their <code class="language-plaintext highlighter-rouge">class_type</code>
+ field could be matched. This is achieved by putting classes into a map 
+with sorted or ordered keys where the key matches the class name. But of
+ course this also means that the algorithm saving the objects to a save 
+file must be matched with the algorithm that is loading the objects from
+ the save file. It is not a big deal, but the reimplementation of these 
+algorithms should be fully accurate to be able to parse and reproduce 
+the original save file format.</p>
+
+<h3 id="file-header">File Header</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">FileType</span> <span class="o">:</span> <span class="kt">unsigned</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">Custom</span><span class="p">,</span>
+  <span class="n">Tutorial</span><span class="p">,</span>
+  <span class="n">Campaign</span><span class="p">,</span>
+  <span class="n">Hot_seat</span><span class="p">,</span>
+  <span class="n">Multiplayer</span><span class="p">,</span>
+  <span class="n">Demo</span><span class="p">,</span>
+  <span class="n">Debug</span><span class="p">,</span>
+  <span class="n">Text</span><span class="p">,</span>
+  <span class="n">Scenario</span><span class="p">,</span>
+  <span class="n">Multi_scenario</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">PlanetType</span> <span class="o">:</span> <span class="kt">unsigned</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">Snowcrab</span><span class="p">,</span>
+  <span class="n">Frigia</span><span class="p">,</span>
+  <span class="n">Ice_Berg</span><span class="p">,</span>
+  <span class="n">The_Cooler</span><span class="p">,</span>
+  <span class="n">Ultima_Thule</span><span class="p">,</span>
+  <span class="n">Long_Floes</span><span class="p">,</span>
+  <span class="n">Iron_Cross</span><span class="p">,</span>
+  <span class="n">Splatterscape</span><span class="p">,</span>
+  <span class="n">Peak_a_boo</span><span class="p">,</span>
+  <span class="n">Valentines_Planet</span><span class="p">,</span>
+  <span class="n">Three_Rings</span><span class="p">,</span>
+  <span class="n">Great_divide</span><span class="p">,</span>
+  <span class="n">New_Luzon</span><span class="p">,</span>
+  <span class="n">Middle_Sea</span><span class="p">,</span>
+  <span class="n">High_Impact</span><span class="p">,</span>
+  <span class="n">Sanctuary</span><span class="p">,</span>
+  <span class="n">Islandia</span><span class="p">,</span>
+  <span class="n">Hammerhead</span><span class="p">,</span>
+  <span class="n">Freckles</span><span class="p">,</span>
+  <span class="n">Sandspit</span><span class="p">,</span>
+  <span class="n">Great_Circle</span><span class="p">,</span>
+  <span class="n">Long_Passage</span><span class="p">,</span>
+  <span class="n">Flash_Point</span><span class="p">,</span>
+  <span class="n">Bottleneck</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Header</span>
+<span class="p">{</span>
+  <span class="kt">short</span> <span class="n">version</span><span class="p">;</span>
+  <span class="n">FileType</span> <span class="n">save_file_type</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">save_game_name</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="n">PlanetType</span> <span class="n">planet</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">mission_index</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">team_name</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">30</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">team_type</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">team_clan</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">rng_seed</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">opponent</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">turn_timer</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">endturn</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">play_mode</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>version</em></strong>: Version of the save file format. M.A.X. 1 does not support conversion between various formats.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Publication Date*</th>
+      <th style="text-align: center">Type of Publication</th>
+      <th style="text-align: center">Game Version**</th>
+      <th style="text-align: center">Save File Format Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1996-08-15</td>
+      <td style="text-align: center">M.A.X. 1 Interactive Demo</td>
+      <td style="text-align: center">V1.00 Demo</td>
+      <td style="text-align: center">V54</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-08-21</td>
+      <td style="text-align: center">M.A.X. 1 Internal Test Build</td>
+      <td style="text-align: center">V1.01 Demo</td>
+      <td style="text-align: center">V54</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-10-09</td>
+      <td style="text-align: center">M.A.X. 1 Interactive Demo</td>
+      <td style="text-align: center">V1.01 Demo</td>
+      <td style="text-align: center">V64</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-11-20</td>
+      <td style="text-align: center">M.A.X. 1 Internal Test Build</td>
+      <td style="text-align: center">V1.56</td>
+      <td style="text-align: center">V69</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-12-08</td>
+      <td style="text-align: center">M.A.X. 1 Retail (CD)</td>
+      <td style="text-align: center">V1.00</td>
+      <td style="text-align: center">V70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-12-10</td>
+      <td style="text-align: center">M.A.X. 1 Retail (CD)</td>
+      <td style="text-align: center">V1.01</td>
+      <td style="text-align: center">V70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1996-12-12</td>
+      <td style="text-align: center">M.A.X. 1 Retail (CD)</td>
+      <td style="text-align: center">V1.02</td>
+      <td style="text-align: center">V70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1997-01-08</td>
+      <td style="text-align: center">M.A.X. 1 Retail (patch)</td>
+      <td style="text-align: center">V1.03</td>
+      <td style="text-align: center">V70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1997-01-16</td>
+      <td style="text-align: center">M.A.X. 1 Interactive Demo</td>
+      <td style="text-align: center">V1.03a Demo</td>
+      <td style="text-align: center">V70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1997-03-26</td>
+      <td style="text-align: center">M.A.X. 1 Retail (patch)</td>
+      <td style="text-align: center">V1.04</td>
+      <td style="text-align: center"><strong>V70</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-05-26</td>
+      <td style="text-align: center">M.A.X. 2 BETA Demo</td>
+      <td style="text-align: center">V.161 Beta</td>
+      <td style="text-align: center">V130</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-06-17</td>
+      <td style="text-align: center">M.A.X. 2 Retail (CD)</td>
+      <td style="text-align: center">V1.0</td>
+      <td style="text-align: center">V135</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-06-19</td>
+      <td style="text-align: center">M.A.X. 2 Retail (CD)</td>
+      <td style="text-align: center">V1.1</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-06-29</td>
+      <td style="text-align: center">M.A.X. 2 Retail (CD)</td>
+      <td style="text-align: center">V1.2</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-06-30</td>
+      <td style="text-align: center">M.A.X. 2 Demo</td>
+      <td style="text-align: center">V1.1c Demo</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-07-10</td>
+      <td style="text-align: center">M.A.X. 2 Retail (patch)</td>
+      <td style="text-align: center">V1.3</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-07-22</td>
+      <td style="text-align: center">M.A.X. 2 Retail (patch #2)</td>
+      <td style="text-align: center">V1.3</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1998-09-17</td>
+      <td style="text-align: center">M.A.X. 2 Retail (patch)</td>
+      <td style="text-align: center">V1.40</td>
+      <td style="text-align: center">V137</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>* The publication date is based on file system date and time stamps. Date format used is YYYY-MM-DD.
+<br>
+** The version number is taken from the game executable.</p>
+
+<p><strong><em>save_file_type</em></strong>: Type of game save file.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Type Index</th>
+      <th style="text-align: center">Save File Type</th>
+      <th style="text-align: center">File Extensions**</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">Single player <strong>Custom</strong> game</td>
+      <td style="text-align: center">dta</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">Tutorial or <strong>Learning</strong> game</td>
+      <td style="text-align: center">tra</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center"><strong>Campaign</strong> game</td>
+      <td style="text-align: center">cam</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center"><strong>Hot seat</strong> game</td>
+      <td style="text-align: center">hot</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center"><strong>Multi</strong> player game</td>
+      <td style="text-align: center">mlt</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center"><strong>Demo</strong> or attract mode game</td>
+      <td style="text-align: center">dmo</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center"><strong>Debug</strong> mode game save*</td>
+      <td style="text-align: center">dbg</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center"><strong>Text</strong> or human readable format save file</td>
+      <td style="text-align: center">txt</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">Single player <strong>Scenario</strong> game</td>
+      <td style="text-align: center">sce</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">Multi player scenario (<strong>MPS</strong>) game</td>
+      <td style="text-align: center">mps</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>*  Only created during simultaneous multiplayer games if the <em>log_file_debug</em> feature is enabled.</p>
+
+<p>** The file extensions listed in this column do not necessarily match
+ the file extensions given when players save their games. For example 
+campaign games created by the developers have the *.cam file extension, 
+while if players save their campaign games the actual game save files 
+get the *.dta extension.</p>
+
+<p><strong><em>save_game_name</em></strong>: Null terminated string. Name given to the saved game by the player or the name of the scenario or mission visible in menus.</p>
+
+<p><a name="cross_ref01"></a>
+<strong><em>planet</em></strong>: Planet index. There are four world types offered by M.A.X. <a href="#ref2">[2]</a>. Each world type has six planets to choose from.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Planet Index</th>
+      <th style="text-align: center">Planet Name</th>
+      <th style="text-align: center">World Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">Snowcrab</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">Frigia</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">Ice Berg</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">The Cooler</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">Ultima Thule</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">Long Floes</td>
+      <td style="text-align: center">Frozen <strong>Snow</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">Iron Cross</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">Splatterscape</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">Peak-a-boo</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">Valentine’s Planet</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">Three Rings</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">Great divide</td>
+      <td style="text-align: center">Rocky <strong>Crater</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center">New Luzon</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">13</td>
+      <td style="text-align: center">Middle Sea</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">14</td>
+      <td style="text-align: center">High Impact</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">15</td>
+      <td style="text-align: center">Sanctuary</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">Islandia</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">17</td>
+      <td style="text-align: center">Hammerhead</td>
+      <td style="text-align: center">Lush tropical <strong>Green</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">18</td>
+      <td style="text-align: center">Freckles</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">19</td>
+      <td style="text-align: center">Sandspit</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">20</td>
+      <td style="text-align: center">Great Circle</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">21</td>
+      <td style="text-align: center">Long Passage</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">22</td>
+      <td style="text-align: center">Flash Point</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">23</td>
+      <td style="text-align: center">Bottleneck</td>
+      <td style="text-align: center">Barren <strong>Desert</strong> world</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong><em>mission_index</em></strong>: Index of the mission. This 
+field determines the victory and loss conditions of training missions, 
+campaign games and single player scenarios or stand alone missions. The 
+rules are hardcoded by the game executable. Valid indices start from 1 
+as 0 means generic custom game rules apply. See <em><a href="#cross_ref02">victory conditions</a></em> section.</p>
+
+<p><strong><em>team_name</em></strong>: Array of null terminated strings. Each player’s name. Order of teams: red, green, blue, gray.</p>
+
+<p><strong><em>team_type</em></strong>: Array defining the type of players. In single player games only one <em>HUMAN_TEAM</em> can be defined, the player. In a self running demo game, attract mode of main menu, there are only <em>COMPUTER_TEAM</em>s. In a multi player game every opponent is a human <em>REMOTE_TEAM</em>. Terminated opponents are <em>ELIMINATED_TEAM</em>s.</p>
+
+<p><a name="cross_ref03"></a></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">TeamType</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">TEAM_TYPE_NONE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">TEAM_TYPE_HUMAN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">TEAM_TYPE_COMPUTER</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">TEAM_TYPE_REMOTE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">TEAM_TYPE_ELIMINATED</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>team_clan</em></strong>: Array defining clan of teams.</p>
+
+<p><a name="cross_ref04"></a></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">TeamClan</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">TEAM_CLAN_THE_CHOSEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_CRIMSON_PATH</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_VON_GRIFFIN</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_AYERS_HAND</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_MUSASHI</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_SACRED_EIGHTS</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_7_KNIGHTS</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="n">TEAM_CLAN_AXIS_INC</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>rng_seed</em></strong>: The game uses this as seed value for it’s pseudo random number generator. Network games share the same <em>rng_seed</em>
+ to be fully deterministic. The value is derived from the time() C-API 
+function from &lt;time.h&gt;. The time function determines the current 
+calendar time which represents the time since January 1, 1970 (UTC) also
+ known as Unix epoch time.</p>
+
+<p><a name="cross_ref08"></a>
+<strong><em>opponent</em></strong>: Difficulty level of <em>TEAM_TYPE_COMPUTER</em> teams.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">OpponentType</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">CLUELESS</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">APPRENTICE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">AVERAGE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">EXPERT</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">MASTER</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">GOD</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a name="cross_ref05"></a>
+<strong><em>turn_timer</em></strong> and <strong><em>endturn</em></strong>: Timer values are in seconds. 0 means infinite.</p>
+
+<p>The Game Clock works somewhat like a chess timer. Two timer values 
+are of significance: the Turn Timer, and the End Turn Timer. As each new
+ turn is started, the Turn Timer resets and starts to count-down to 
+zero. The default Turn time is 180 seconds, or three minutes. This is 
+the time available for each turn. When the timer gets to zero, the turn 
+ends automatically, and the next turn starts. You may click the End Turn
+ button when you are finished with each turn to reset the timer and 
+start a new turn. After clicking End Turn, the End Turn Timer starts 
+counting down to allow your opponent(s) the opportunity to finish their 
+turns. The default End Turn time is 45 seconds <a href="#ref2">[2]</a>.</p>
+
+<p><a name="cross_ref06"></a>
+<strong><em>play_mode</em></strong>: M.A.X. can be played in standard 
+Turn-Based mode or in Concurrent mode, in which players take their turns
+ simultaneously as in a realtime game <a href="#ref2">[2]</a>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">PlayMode</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">PLAY_MODE_TURN_BASED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">PLAY_MODE_SIMULTANEOUS_MOVES</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a name="cross_ref02"></a></p>
+<h3 id="victory-and-loss-conditions">Victory and Loss Conditions</h3>
+
+<h4 id="generic-rules">Generic Rules</h4>
+
+<p>If <strong><em>mission_index</em></strong> is 0, then generic <em>custom game</em> victory and loss conditions are applicable.</p>
+
+<p>Two <em>victory conditions</em> are available during <em>custom games</em>, and are based either on reaching a certain goal of points or upon the number of turns played <a href="#ref2">[2]</a>.</p>
+
+<p><a name="cross_ref07"></a>
+<strong><em>Victory Conditions</em></strong>:</p>
+
+<p>Option 1: When playing for a set number of victory points, the first player who reaches the goal is designated the winner.</p>
+
+<p>Option 2: When playing based on the number of turns, the player with 
+the highest number of victory points when the turn limit is reached wins
+ the game.</p>
+
+<p>Regardless of selecting option 1 or option 2 during game setup, if 
+all opponents are eliminated, when all of them fulfill the loss 
+conditions, the remaining player wins.</p>
+
+<p>In case there is a tie based on victory points derived from 
+eco-spheres the game calculates the sum of turns that were required to 
+build all built and still standing buildings at build rate 1x speed and 
+the player with the more “valuable” base wins.</p>
+
+<p>The turns required to build certain buildings depend on clan 
+(dis)advantages. But even worse the game uses the given team’s latest 
+upgraded unit attributes tables. This means that a highly researched 
+turns attribute puts players at a disadvantage as the calculated “value”
+ of their bases will be lower. In case of a tie this could greatly 
+affect which team would win at the end.</p>
+
+<p>If there is still a tie even after comparing the “value” of bases, 
+the player with the smaller team index wins. Red team’s index is the 
+smallest, and the gray team’s is the highest.</p>
+
+<p><strong><em>Loss Conditions</em></strong>:</p>
+
+<p>The following diagram sums up the generic loss conditions.</p>
+
+<p><img src="Save%20File%20Format%20M.A.X.%20Port_files/loss_conditions.svg" alt="Loss Conditions"></p>
+
+<p>There are corner cases that are not handled well. For example if the <em>construction power</em>
+ loss condition needs to be evaluated and the team has mining stations 
+but they cannot mine materials as there are no raw material deposits 
+beneath them the game will not signal defeat. The first mining station 
+of a team always has at least 10 raw materials and 7 fuel, but that 
+mining station could get destroyed.</p>
+
+<p>We could rationalize that in case we have working eco-spheres our 
+victory points may still be increasing passively even if we have no 
+military power and we cannot build anything at all. The game play would 
+be rather boring, but maybe just a few turns are remaining till victory 
+conditions are met.</p>
+
+<p>It is also strange why stealth units do not count towards military 
+power while fighters (airplane) do. It is true that most buildings have 
+higher armor rating than the attack power of infiltrators, but they 
+could steal mobile enemy or neutral (alien) military units. On a map 
+like Sandspit there is a high chance that a few submarines could destroy
+ some enemy eco-spheres or could protect their own ones that could 
+considerably affect victory points.</p>
+
+<h4 id="training-missions">Training Missions</h4>
+
+<h4 id="stand-alone-missions">Stand Alone Missions</h4>
+
+<h4 id="campaign-game">Campaign Game</h4>
+
+<p><strong><em>Mission 1 - Islands in the Sun</em></strong></p>
+
+<p>TODO</p>
+
+<h3 id="options-section-of-ini-settings">Options Section of INI settings</h3>
+
+<p>M.A.X. v1.04 defines the following INI configuration settings within 
+the OPTIONS section. The numeric values are just default values. These 
+settings are all numeric so they are stored as 32 bit integers. An 
+alphanumeric setting would be stored as a null terminated string always 
+on 30 bytes.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span>
+<span class="n">world</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">timer</span><span class="o">=</span><span class="mi">180</span>
+<span class="n">endturn</span><span class="o">=</span><span class="mi">45</span>
+<span class="n">start_gold</span><span class="o">=</span><span class="mi">150</span>
+<span class="n">play_mode</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">victory_type</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">victory_limit</span><span class="o">=</span><span class="mi">50</span>
+<span class="n">opponent</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">raw_resource</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">fuel_resource</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">gold_resource</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">alien_derelicts</span><span class="o">=</span><span class="mi">0</span>
+</code></pre></div></div>
+
+<p>The above settings are stored as follows:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">IniOptions</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">world</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">turn_timer</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">endturn</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">start_gold</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">play_mode</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">victory_type</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">victory_limit</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">opponent</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">raw_resource</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">fuel_resource</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">gold_resource</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">alien_derelicts</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>In case of campaign, single and multi player scenario games the <strong><em>opponent</em></strong>, <strong><em>timer</em></strong>, <strong><em>endturn</em></strong> and <strong><em>play_mode</em></strong> settings are overwritten by the Header fields of the same name.</p>
+
+<p><strong><em>world</em></strong>: See <em><a href="#cross_ref01">planet field</a></em>.</p>
+
+<p><strong><em>turn_timer</em></strong> and <strong><em>endturn</em></strong>: See <em><a href="#cross_ref05">reference</a></em>.</p>
+
+<p><strong><em>start_gold</em></strong>: This is the starting credit ranging from 0 to 250 credits.</p>
+
+<p><strong><em>play_mode</em></strong>: See <em><a href="#cross_ref06">reference</a></em>.</p>
+
+<p><strong><em>victory_type</em></strong> and <strong><em>victory_limit</em></strong>: See <em><a href="#cross_ref07">reference</a></em>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">VictoryType</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">VICTORY_TYPE_DURATION</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">VICTORY_TYPE_SCORE</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>opponent</em></strong>: See <em><a href="#cross_ref08">reference</a></em>.</p>
+
+<p><strong><em>raw_resource</em></strong>, <strong><em>fuel_resource</em></strong> and <strong><em>gold_resource</em></strong>:
+ The Resource Levels options allow to set the amount and distribution of
+ the various resources (Raw Material, Fuel and Gold) that will be 
+available during the game <a href="#ref2">[2]</a>.</p>
+
+<p>The valid value range is 0 to 2 representing Poor, Medium and Rich settings.</p>
+
+<p><strong><em>alien_derelicts</em></strong>: The option allows to set the amount and distribution of alien derelicts.</p>
+
+<p>The valid value range is 0 to 2 representing None, Rare and Common settings.</p>
+
+<h3 id="planet-surface-map">Planet Surface Map</h3>
+
+<p>M.A.X. uses a top-down square grid or tile map system. The coordinate
+ system is based on a standard x,y grid, with coordinate 0,0 at the top 
+left of the map. X-coordinate measures from left to right and 
+Y-coordinates from top to bottom <a href="#ref2">[2]</a>.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">SurfaceType</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">SURFACE_TYPE_LAND</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">SURFACE_TYPE_WATER</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">SURFACE_TYPE_COAST</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">SURFACE_TYPE_AIR</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">SurfaceType</span> <span class="n">SurfaceMap</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>In M.A.X. the grid map size is always 112 x 112 tiles so <code class="language-plaintext highlighter-rouge">x = y = 112;</code> in <code class="language-plaintext highlighter-rouge">SurfaceMap[x][y]</code>.</p>
+
+<p>Each element in the above array defines the accessibility property of
+ the associated grid map cell. For example if a cell can only be crossed
+ by air units, then the surface type is <em>SURFACE_TYPE_AIR</em>.</p>
+
+<h3 id="planet-resource-map">Planet Resource Map</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CARGO_FUEL</span> <span class="mh">0x20</span>
+<span class="n">CARGO_GOLD</span> <span class="mh">0x40</span>
+<span class="n">CARGO_MATERIALS</span> <span class="mh">0x80</span>
+
+<span class="n">TEAM_VISIBILITY_RED</span> <span class="mh">0x2000</span>
+<span class="n">TEAM_VISIBILITY_GREEN</span> <span class="mh">0x1000</span>
+<span class="n">TEAM_VISIBILITY_BLUE</span> <span class="mh">0x800</span>
+<span class="n">TEAM_VISIBILITY_GRAY</span> <span class="mh">0x400</span>
+
+<span class="n">RESOURCE_AMOUNT_MASK</span> <span class="mh">0x1F</span>
+<span class="n">RESOURCE_TYPE_MASK</span> <span class="mh">0xE0</span>
+<span class="n">TEAM_VISIBILITY_MASK</span> <span class="mh">0x1C00</span>
+
+<span class="kt">short</span> <span class="n">GridResourceMapEntry</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>In M.A.X. the grid map size is always 112 x 112 tiles so <code class="language-plaintext highlighter-rouge">x = y = 112;</code> in <code class="language-plaintext highlighter-rouge">GridResourceMapEntry[x][y]</code>.</p>
+
+<p><img src="Save%20File%20Format%20M.A.X.%20Port_files/bitfield_save_rmap_entry.svg" alt="Resource Map Entry Bitfield"></p>
+
+<p><strong><em>cargo amount</em></strong>: The 5 LSBs represent the amount of  resource available at the cell. The game limits the usable amount to 16 though.</p>
+
+<p><strong><em>cargo type</em></strong>: The type of resource present at the cell. Bit 5 is <em>CARGO_FUEL</em>, bit 6 is <em>CARGO_GOLD</em> and bit 7 is <em>CARGO_MATERIALS</em>. Only one bit should be set.</p>
+
+<p><strong><em>team visibility</em></strong>: If a specific team surveyed the cell, then the team specific bit is set. Bit 10 is <em>GRAY_TEAM</em>, bit 11 is <em>BLUE_TEAM</em>, bit 12 is <em>GREEN_TEAM</em> and bit 13 is <em>RED_TEAM</em>.</p>
+
+<p>Example: the 16 bit value of 0x208C means 12 raw materials visible by red team only.</p>
+
+<h3 id="serialized-team-info-objects">Serialized Team Info Objects</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Point</span>
+<span class="p">{</span>
+  <span class="kt">short</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">ResearchTopicInfo</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">research_level</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">turns_to_complete</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">allocation</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">ScreenLocation</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">TeamInfo</span>
+<span class="p">{</span>
+  <span class="n">Point</span> <span class="n">markers</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+  <span class="n">TeamType</span> <span class="n">team_type</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">field_41</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan</span><span class="p">;</span>
+  <span class="n">ResearchTopicInfo</span> <span class="n">research_topics</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">victory_points</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">last_unit_id</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">unit_counters</span><span class="p">[</span><span class="mi">93</span><span class="p">];</span>
+  <span class="n">ScreenLocation</span> <span class="n">screen_location</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+  <span class="kt">short</span> <span class="n">score_graph</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">selected_unit</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">zoom_level</span><span class="p">;</span>
+  <span class="n">Point</span> <span class="n">screen_position</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_range</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_scan</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_status</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_colors</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_hits</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_ammo</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_minimap_2x</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_minimap_tnt</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_grid</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_names</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">gui_button_state_survey</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">stats_factories_built</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">stats_mines_built</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">stats_buildings_built</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">stats_units_built</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">casualties</span><span class="p">[</span><span class="mi">93</span><span class="p">];</span>
+  <span class="kt">short</span> <span class="n">stats_gold_spent_on_upgrades</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Four instances of the <code class="language-plaintext highlighter-rouge">TeamInfo</code>
+ structure are written to the save file representing the four teams. Red
+ is the first, green is the second, blue is the third, gray is the 
+fourth.</p>
+
+<p><strong><em>markers</em></strong>: Array elements are initialized to 
+{-1, -1} or simply 0xFFFF, 0xFFFF. The feature was removed from the game
+ so this field is useless.</p>
+
+<p><strong><em>team_type</em></strong>: Type of the given team. See <em><a href="#cross_ref03">TeamType</a></em> type.</p>
+
+<p><strong><em>field_41</em></strong>: TODO</p>
+
+<p><strong><em>team_clan</em></strong>: Clan of the given team. See <em><a href="#cross_ref04">TeamClan</a></em> type.</p>
+
+<p><strong><em>research_topics</em></strong>: There are 8 research topics. The <em>research_level</em> field defines the number of research cycles already finished.  The <em>turns_to_complete</em>
+ field defines the number of turns required to complete a given research
+ cycle if a single research center would be assigned to work on the 
+topic. If the value is 0 it means the next level’s research is not yet 
+started. The formula for the actual turns required is as follows: <code class="language-plaintext highlighter-rouge">turns = ceil(turns_to_complete / allocation);</code>. The <em>allocation</em> field defines the number of research centers allocated to a given topic.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">ResearchTopic</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">RESEARCH_TOPIC_ATTACK</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_SHOTS</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_RANGE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_ARMOR</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_HITS</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_SPEED</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_SCAN</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">RESEARCH_TOPIC_COST</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>victory_points</em></strong>: Number of victory points acquired for operating eco-spheres.</p>
+
+<p><strong><em>last_unit_id</em></strong>: The valid value range is 1 to 8191. Unit hash identifiers are derived from this counter’s value.</p>
+
+<p><strong><em>unit_counters</em></strong>: There are 93 different types
+ of units in the game. Each array element represents a given type of 
+unit. The value is used to derive basic unit names to newly created 
+units. For example if a team has 10 tanks then <code class="language-plaintext highlighter-rouge">unit_counters[UNIT_TYPE_TANK] = 11</code> as the next unit index will be 11. The array elements are initialized to 1. The 10th tank would get the basic unit name <em>MK 1 TANK 10</em>.
+ The counter could easily overflow during a long game which means that 
+multiple units could have the exact same name. In case of an overflow 
+index 0 is skipped.</p>
+
+<p><strong><em>screen_location</em></strong>: {x, y} coordinates of the 
+previously saved screen locations. The array has 6 elements which is odd
+ as only four function keys can be used to set or recall locations using
+ F5 to F8. Array elements are initialized to {-1, -1} or simply 0xFF, 
+0xFF. See chapter <em>Setting Locations</em> in <a href="#ref2">[2]</a> for further details on the feature.</p>
+
+<p><strong><em>score_graph</em></strong>: The score report presents a graph of each teams point totals over a period of the last 50 turns <a href="#ref2">[2]</a>.</p>
+
+<p><strong><em>selected_unit</em></strong>: Default value is 0xFFFF 
+which means no unit is selected. Otherwise the value is set to the hash 
+ID of the selected unit. Not every <em>UnitInfo</em> object gets a hash ID, in cases the default 0xFFFF could also be used.</p>
+
+<p>The hash ID is derived from the <em>last_unit_id</em> field and the unit’s <em>team index</em>. Mind that there are 5 teams actually. All neutral alien derelicts related units belong to the fifth team.</p>
+
+<p><img src="Save%20File%20Format%20M.A.X.%20Port_files/bitfield_unit_hash_id.svg" alt="Unit Hash ID Bitfield"></p>
+
+<p><strong><em>zoom_level</em></strong>: Resolution of the main map 
+display window. The minimum value is 4, maximum is 64. Zoom level 64 is 
+pixel perfect 1:1 resolution.</p>
+
+<p><strong><em>screen_position</em></strong>: {x, y} grid coordinates to
+ be used as the center of the screen if possible. The valid value range 
+for the coordinates is 0 to 111.</p>
+
+<p><strong><em>gui_button_state_xyz</em></strong>: Each of the display buttons are toggles which activate a visual display of some kind on the map display window <a href="#ref2">[2]</a>. 0 means the toggle is off, any other value means on.</p>
+
+<p><strong><em>stats_factories_built</em></strong>: Number of factory buildings built by the team during the game. The statistic is displayed on the game over screen.</p>
+
+<p><strong><em>stats_mines_built</em></strong>: Number of mining stations built by the team during the game. The statistic is displayed on the game over screen.</p>
+
+<p><strong><em>stats_buildings_built</em></strong>: Number of buildings built by the team during the game. The statistic is displayed on the game over screen.</p>
+
+<p><strong><em>stats_units_built</em></strong>: Number of mobile units built by the team during the game. The statistic is displayed on the game over screen.</p>
+
+<p><strong><em>casualties</em></strong>: There are 93 different types of
+ units in the game. Each array element represents the number of units of
+ a particular type lost by the team during the game. The statistic is 
+displayed in the reports menu. The array is also used from time to time 
+to determine victory and loss conditions.</p>
+
+<p><strong><em>stats_gold_spent_on_upgrades</em></strong>: Amount of gold spent by the team on unit upgrades during the game. The statistic is displayed on the game over screen.</p>
+
+<h3 id="game-manager-state">Game Manager State</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">TeamIndex</span> <span class="o">:</span> <span class="kt">char</span>
+<span class="p">{</span>
+  <span class="n">TEAM_INDEX_RED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_GREEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_BLUE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_GRAY</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">GameManagerState</span>
+<span class="p">{</span>
+  <span class="n">TeamIndex</span> <span class="n">active_turn_team</span><span class="p">;</span>
+  <span class="n">TeamIndex</span> <span class="n">player_team</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">turn_counter</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">game_state</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">turn_timer</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>active_turn_team</em></strong>:</p>
+
+<p><strong><em>player_team</em></strong>:</p>
+
+<p><strong><em>turn_counter</em></strong>:</p>
+
+<p><strong><em>game_state</em></strong>:</p>
+
+<p><strong><em>turn_timer</em></strong>:</p>
+
+<p>TODO</p>
+
+<h3 id="preferences-section-of-ini-settings">Preferences Section of INI settings</h3>
+
+<p>M.A.X. v1.04 defines the following INI configuration settings within 
+the PREFERENCES section. The numeric values are just default values. 
+These settings are all numeric so they are stored as 32 bit integers. An
+ alphanumeric setting would be stored as a null terminated string always
+ on 30 bytes.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">PREFERENCES</span><span class="p">]</span>
+<span class="n">effects</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">click_scroll</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">quick_scroll</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">fast_movement</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">follow_unit</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">auto_select</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">enemy_halt</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>The above settings are stored as follows:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">IniPreferences</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">effects</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">click_scroll</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">quick_scroll</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">fast_movement</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">follow_unit</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">auto_select</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">enemy_halt</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>See the game user manual for detailed descriptions of the settings <a href="#ref2">[2]</a>. Most settings are toggles so their valid value range is 0 to 1.</p>
+
+<p><strong><em>effects</em></strong>: Animate effects.</p>
+
+<p><strong><em>click_scroll</em></strong>: Click to scroll.</p>
+
+<p><strong><em>quick_scroll</em></strong>: Quick scroll. The valid value range is 4 to 128.</p>
+
+<p><strong><em>fast_movement</em></strong>: Fast unit moves.</p>
+
+<p><strong><em>follow_unit</em></strong>: Follow unit.</p>
+
+<p><strong><em>auto_select</em></strong>: Automatically switch to the next unit when the selected unit has run out of movement points.</p>
+
+<p><strong><em>enemy_halt</em></strong>: Halt movement when enemy is detected.</p>
+
+<h3 id="serialized-team-units-objects">Serialized Team Units Objects</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">UnitValues</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">object_index</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">object_index</span> <span class="o">&lt;</span> <span class="n">last_object_index</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">last_object_index</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">class_type</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">turns</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hits</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">armor</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">attack</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">speed</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">range</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">rounds</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">move_and_fire</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">scan</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">storage</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">ammo</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">attack_radius</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">agent_adjust</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">version</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">units_built</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Complex</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">object_index</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">object_index</span> <span class="o">&lt;</span> <span class="n">last_object_index</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">last_object_index</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">class_type</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">material</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">fuel</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">gold</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">power</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">workers</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">buildings</span><span class="p">;</span>
+    <span class="kt">short</span> <span class="n">id</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">TeamUnits</span>
+<span class="p">{</span>
+  <span class="kt">signed</span> <span class="kt">short</span> <span class="n">gold</span><span class="p">;</span>
+  <span class="n">UnitValues</span> <span class="n">base_unit_values</span><span class="p">[</span><span class="mi">93</span><span class="p">];</span>
+  <span class="n">UnitValues</span> <span class="n">current_unit_values</span><span class="p">[</span><span class="mi">93</span><span class="p">];</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">complex_count</span><span class="p">;</span>
+  <span class="n">Complex</span> <span class="n">complexes</span><span class="p">[</span><span class="n">complex_count</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Four instances of the <code class="language-plaintext highlighter-rouge">TeamUnits</code>
+ structure are written to the save file representing the four teams. Red
+ is the first, green is the second, blue is the third, gray is the 
+fourth.</p>
+
+<p><strong><em>gold</em></strong>: Team credits that could be used to purchase upgrades in gold refineries. The field is stored as a 16 bit signed value.</p>
+
+<p><strong><em>base_unit_values</em></strong>: There are 93 different 
+types of units in the game. Each array element represents a unit type’s 
+base unit values data. Base unit values incorporate clan upgrades. This 
+might not seem to be a big deal at first, but it is as the higher the 
+initial unit attribute value the cheaper it is to upgrade later. So an 
+already excellent clan special unit type could be upgraded into a superb
+ unit type faster. The <em>version</em> field defines the mark level of a unit. The initial value of the <em>version</em> field is 1. If the <em>units_built</em> field is zero when a new version is created from the unit type the <em>version</em> field is not incremented. The <em>storage</em> field has special meaning for units that gather experience.</p>
+
+<p><strong><em>current_unit_values</em></strong>: Each array element 
+represents a unit type’s current unit values data. This array represents
+ the latest technology. New units will be created using these unit 
+values.</p>
+
+<p><strong><em>complex_count</em></strong>: Complexes are buildings that
+ are connected together. Complexes share power and cargo supplies. The 
+number of team complexes dynamically change during the course of game 
+play. This field defines the number of serialized <em>Complex</em> class objects that follows. In case the given team does not have any complexes the value is 0 and no <em>Complex</em> structure follows.</p>
+
+<p><strong><em>complexes</em></strong>: The <em>material</em>, <em>fuel</em> and <em>gold</em> fields represent the stored and the produced resources. The <em>power</em> and <em>workers</em> fields represent the surplus of generated power and unallocated workforce within the complex. The <em>buildings</em> field defines the number of buildings currently associated with the given complex. The <em>id</em> field is the unique index of the given complex. The game stores complexes in an ordered linked list so the <em>id</em> should monotonically increase in the save file for each team.</p>
+
+<h3 id="serialized-unit-info-object-lists">Serialized Unit Info Object Lists</h3>
+
+<p>Even though there are 6 <em>UnitInfo</em> object lists, only 5 of them are saved.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">UnitType</span> <span class="o">:</span> <span class="kt">short</span>
+<span class="p">{</span>
+  <span class="n">UNIT_TYPE_GOLD_REFINERY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_POWER_STATION</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_POWER_GENERATOR</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_BARRACKS</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_BUILDING_1</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_RADAR</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_STORAGE_UNIT</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_FUEL_TANK</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_GOLD_VAULT</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_DEPOT</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_HANGAR</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_DOCK</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_CONNECTOR</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LARGE_RUBBLE_1</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SMALL_RUBBLE_1</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LARGE_TAPE</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SMALL_TAPE</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LARGE_SLAB</span> <span class="o">=</span> <span class="mi">17</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SMALL_SLAB</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LARGE_CONES</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SMALL_CONES</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ROAD</span> <span class="o">=</span> <span class="mi">21</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LANDING_PAD</span> <span class="o">=</span> <span class="mi">22</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SHIPYARD</span> <span class="o">=</span> <span class="mi">23</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LIGHT_VEHICLE_PLANT</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_HEAVY_VEHICLE_PLANT</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_BUILDING_2</span> <span class="o">=</span> <span class="mi">26</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_AIR_UNITS_PLANT</span> <span class="o">=</span> <span class="mi">27</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_HABITAT</span> <span class="o">=</span> <span class="mi">28</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_RESEARCH_CENTER</span> <span class="o">=</span> <span class="mi">29</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ECOSPHERE</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_BUILDING_3</span> <span class="o">=</span> <span class="mi">31</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_TRAINING_HALL</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_WATER_PLATFORM</span> <span class="o">=</span> <span class="mi">33</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_GUN_TURRET</span> <span class="o">=</span> <span class="mi">34</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ANTI_AIRCRAFT</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ARTILLERY</span> <span class="o">=</span> <span class="mi">36</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MISSILE_LAUNCHER</span> <span class="o">=</span> <span class="mi">37</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_CONCRETE_BLOCK</span> <span class="o">=</span> <span class="mi">38</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_BRIDGE</span> <span class="o">=</span> <span class="mi">39</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MINING_STATION</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LAND_MINE</span> <span class="o">=</span> <span class="mi">41</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SEA_MINE</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_LAND_EXPLOSION</span> <span class="o">=</span> <span class="mi">43</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_AIR_EXPLOSION</span> <span class="o">=</span> <span class="mi">44</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SEA_EXPLOSION</span> <span class="o">=</span> <span class="mi">45</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_BUILDING_EXPLOSION</span> <span class="o">=</span> <span class="mi">46</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_HIT_EXPLOSION</span> <span class="o">=</span> <span class="mi">47</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MASTER_BUILDER</span> <span class="o">=</span> <span class="mi">48</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_CONSTRUCTOR</span> <span class="o">=</span> <span class="mi">49</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SCOUT</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_TANK</span> <span class="o">=</span> <span class="mi">51</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ASSAULT_GUN</span>  <span class="o">=</span> <span class="mi">52</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ROCKET_LAUNCHER</span> <span class="o">=</span> <span class="mi">53</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MISSILE_CRAWLER</span> <span class="o">=</span> <span class="mi">54</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MOBILE_ANTI_AIRCRAFT</span> <span class="o">=</span> <span class="mi">55</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MINE_LAYER</span> <span class="o">=</span> <span class="mi">56</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SURVEYOR</span> <span class="o">=</span> <span class="mi">57</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SCANNER</span> <span class="o">=</span> <span class="mi">58</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SUPPLY_TRUCK</span> <span class="o">=</span> <span class="mi">59</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_GOLD_TRUCK</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ENGINEER</span> <span class="o">=</span> <span class="mi">61</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_BULLDOZER</span> <span class="o">=</span> <span class="mi">62</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_REPAIR_UNIT</span> <span class="o">=</span> <span class="mi">63</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_FUEL_TRUCK</span> <span class="o">=</span> <span class="mi">64</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_PERSONNEL_CARRIER</span> <span class="o">=</span> <span class="mi">65</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_INFILTRATOR</span> <span class="o">=</span> <span class="mi">66</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_INFANTRY</span> <span class="o">=</span> <span class="mi">67</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ESCORT</span> <span class="o">=</span> <span class="mi">68</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_CORVETTE</span> <span class="o">=</span> <span class="mi">69</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_GUNBOAT</span> <span class="o">=</span> <span class="mi">70</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SUBMARINE</span> <span class="o">=</span> <span class="mi">71</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SEA_TRANSPORT</span> <span class="o">=</span> <span class="mi">72</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MISSILE_CRUISER</span> <span class="o">=</span> <span class="mi">73</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SEA_MINE_LAYER</span> <span class="o">=</span> <span class="mi">74</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_CARGO_SHIP</span> <span class="o">=</span> <span class="mi">75</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_FIGHTER</span> <span class="o">=</span> <span class="mi">76</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_GROUND_ATTACK_PLANE</span> <span class="o">=</span> <span class="mi">77</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_AIR_TRANSPORT</span> <span class="o">=</span> <span class="mi">78</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_AWAC</span> <span class="o">=</span> <span class="mi">79</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_GUNBOAT</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_TANK</span> <span class="o">=</span> <span class="mi">81</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_ASSAULT_GUN</span> <span class="o">=</span> <span class="mi">82</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_ATTACK_PLANE</span> <span class="o">=</span> <span class="mi">83</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_MISSILE</span> <span class="o">=</span> <span class="mi">84</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_TORPEDO</span> <span class="o">=</span> <span class="mi">85</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ALIEN_MISSILE</span> <span class="o">=</span> <span class="mi">86</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_TANK_PLASMA_BALL</span> <span class="o">=</span> <span class="mi">87</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_ARTILLERY_PLASMA_BALL</span> <span class="o">=</span> <span class="mi">88</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_SMOKE_TRAIL</span> <span class="o">=</span> <span class="mi">89</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_BUBBLE_TRAIL</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_HARVESTER</span> <span class="o">=</span> <span class="mi">91</span><span class="p">,</span>
+  <span class="n">UNIT_TYPE_DEAD_WALDO</span> <span class="o">=</span> <span class="mi">92</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">OrderType</span> <span class="o">:</span> <span class="kt">short</span>
+<span class="p">{</span>
+  <span class="n">ORDER_TYPE_AWAITING</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_TRANSFORMING</span> <span class="o">=</span> <span class="mh">0x1</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_MOVING</span> <span class="o">=</span> <span class="mh">0x2</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_FIRING</span> <span class="o">=</span> <span class="mh">0x3</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_ORDER_BUILDING</span> <span class="o">=</span> <span class="mh">0x4</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_ACTIVATE_ORDER</span> <span class="o">=</span> <span class="mh">0x5</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_NEW_ALLOCATE_ORDER</span> <span class="o">=</span> <span class="mh">0x6</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_POWER_ON</span> <span class="o">=</span> <span class="mh">0x7</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_POWER_OFF</span> <span class="o">=</span> <span class="mh">0x8</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_EXPLODING</span> <span class="o">=</span> <span class="mh">0x9</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_UNLOADING</span> <span class="o">=</span> <span class="mh">0xA</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_CLEARING</span> <span class="o">=</span> <span class="mh">0xB</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_SENTRY</span> <span class="o">=</span> <span class="mh">0xC</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_LANDING</span> <span class="o">=</span> <span class="mh">0xD</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_TAKING_OFF</span> <span class="o">=</span> <span class="mh">0xE</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_LOADING</span> <span class="o">=</span> <span class="mh">0xF</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_IDLE</span> <span class="o">=</span> <span class="mh">0x10</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_REPAIRING</span> <span class="o">=</span> <span class="mh">0x11</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_REFUELING</span> <span class="o">=</span> <span class="mh">0x12</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_RELOADING</span> <span class="o">=</span> <span class="mh">0x13</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_TRANSFERRING</span> <span class="o">=</span> <span class="mh">0x14</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_AWAITING_21</span> <span class="o">=</span> <span class="mh">0x15</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_AWAITING_22</span> <span class="o">=</span> <span class="mh">0x16</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_AWAITING_23</span> <span class="o">=</span> <span class="mh">0x17</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_AWAITING_24</span> <span class="o">=</span> <span class="mh">0x18</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_AWAITING_25</span> <span class="o">=</span> <span class="mh">0x19</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_DISABLED</span> <span class="o">=</span> <span class="mh">0x1A</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_MOVING_27</span> <span class="o">=</span> <span class="mh">0x1B</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_REPAIRING_28</span> <span class="o">=</span> <span class="mh">0x1C</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_TRANSFERRING_29</span> <span class="o">=</span> <span class="mh">0x1D</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_ATTACKING</span> <span class="o">=</span> <span class="mh">0x1E</span><span class="p">,</span>
+  <span class="n">ORDER_TYPE_BUILDING_HALTED</span> <span class="o">=</span> <span class="mh">0x1F</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Rect</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">ulx</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">uly</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">lrx</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">lry</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">enum</span> <span class="n">ClassType</span> <span class="o">:</span> <span class="kt">short</span>
+<span class="p">{</span>
+  <span class="n">CLASS_TYPE_AIR_PATH</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">CLASS_TYPE_BUILDER_PATH</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">CLASS_TYPE_GROUND_PATH</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">PathStep</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">x</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Path</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">object_index</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">object_index</span> <span class="o">&lt;</span> <span class="n">last_object_index</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">last_object_index</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">class_type</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">class_type</span> <span class="o">==</span> <span class="n">CLASS_TYPE_AIR_PATH</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="kt">short</span> <span class="n">length</span><span class="p">;</span>
+      <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">angle</span><span class="p">;</span>
+      <span class="n">Point</span> <span class="n">pixel_start</span><span class="p">;</span>
+      <span class="n">Point</span> <span class="n">pixel_end</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">x_step</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">y_step</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">delta_x</span><span class="p">;</span>
+      <span class="kt">int</span> <span class="n">delta_y</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">class_type</span> <span class="o">==</span> <span class="n">CLASS_TYPE_GROUND_PATH</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">Point</span> <span class="n">pixel_end</span><span class="p">;</span>
+      <span class="kt">short</span> <span class="n">index</span><span class="p">;</span>
+      <span class="kt">short</span> <span class="n">steps_count</span><span class="p">;</span>
+      <span class="n">PathStep</span> <span class="n">steps</span><span class="p">[</span><span class="n">steps_count</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">class_type</span> <span class="o">==</span> <span class="n">CLASS_TYPE_BUILDER_PATH</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">Point</span> <span class="n">coordinate</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="n">assert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Unknown path class"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">UnitTypeArray</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">object_count</span><span class="p">;</span>
+
+  <span class="n">UnitType</span> <span class="n">array</span><span class="p">[</span><span class="n">object_count</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">UnitInfo</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">object_index</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">object_index</span> <span class="o">&lt;</span> <span class="n">last_object_index</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">last_object_index</span><span class="o">++</span><span class="p">;</span>
+
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">class_type</span><span class="p">;</span>
+    <span class="n">UnitType</span> <span class="n">unit_type</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">unit_type</span> <span class="o">==</span> <span class="n">UNIT_TYPE_DEAD_WALDO</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="n">print</span><span class="p">(</span><span class="s">"Found Waldo!"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hash_id</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="n">Point</span> <span class="n">pixel_position</span><span class="p">;</span>
+    <span class="n">Point</span> <span class="n">grid_position</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">name_length</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">name_length</span><span class="p">];</span>
+    <span class="n">Point</span> <span class="n">shadow_offset</span><span class="p">;</span>
+    <span class="n">TeamIndex</span> <span class="n">team</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">name_index</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">brightness</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">angle</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">visible_to_team</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">spotted_by_team</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">max_velocity</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">velocity</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sound</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">scaler_adjust</span><span class="p">;</span>
+    <span class="n">Rect</span> <span class="n">sprite_bounds</span><span class="p">;</span>
+    <span class="n">Rect</span> <span class="n">shadow_bounds</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">turret_angle</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">turret_offset_x</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">turret_offset_y</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">total_images</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">image_base</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">turret_image_base</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">firing_image_base</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">connector_image_base</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">image_index</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">turret_image_index</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">image_index_max</span><span class="p">;</span>
+    <span class="n">OrderType</span> <span class="n">orders</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">state</span><span class="p">;</span>
+    <span class="n">OrderType</span> <span class="n">prior_orders</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">prior_state</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">laying_state</span><span class="p">;</span>
+    <span class="n">Point</span> <span class="n">target_grid</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">build_time</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">total_mining</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">raw_mining</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">fuel_mining</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">gold_mining</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">raw_mining_max</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">gold_mining_max</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">fuel_mining_max</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">hits</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">speed</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shots</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">move_and_fire</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">storage</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">ammo</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">targeting_mode</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">enter_mode</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">cursor</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">recoil_delay</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">delayed_reaction</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">damaged_this_turn</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">research_topic</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">moved</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">bobbed</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shake_effect_state</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">engine</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">weapon</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">comm</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">fuel_distance</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">move_fraction</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">energized</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">repeat_build</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">build_rate</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">disabled_reaction_fire</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">auto_survey</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">field_221</span><span class="p">;</span>
+    <span class="n">Path</span> <span class="n">path</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">connectors</span><span class="p">;</span>
+    <span class="n">UnitValues</span> <span class="n">base_values</span><span class="p">;</span>
+    <span class="n">Complex</span> <span class="n">complex</span><span class="p">;</span>
+    <span class="n">UnitInfo</span> <span class="n">parent_unit</span><span class="p">;</span>
+    <span class="n">UnitInfo</span> <span class="n">enemy_unit</span><span class="p">;</span>
+    <span class="n">UnitTypeArray</span> <span class="n">build_list</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">UnitInfoList</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">unitinfo_count</span><span class="p">;</span>
+  <span class="n">UnitInfo</span> <span class="n">units</span><span class="p">[</span><span class="n">unitinfo_count</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="serialized-hash-maps">Serialized Hash Maps</h3>
+
+<p>There are two hash maps. The first is a Hash_UnitInfo type object, the second is a Hash_MapHash type object.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Hash_UnitInfo</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hash_size</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">map</span><span class="p">[</span><span class="n">hash_size</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">MapHash</span>
+<span class="p">{</span>
+  <span class="n">Point</span> <span class="n">coordinates</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">units</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">MapHashList</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">maphash_count</span><span class="p">;</span>
+  <span class="n">MapHash</span> <span class="n">objects</span><span class="p">[</span><span class="n">maphash_count</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">Hash_MapHash</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">hash_size</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">x_shift</span><span class="p">;</span>
+  <span class="n">MapHashList</span> <span class="n">map</span><span class="p">[</span><span class="n">hash_size</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="heat-maps">Heat Maps</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">TeamHeatMaps</span>
+<span class="p">{</span>
+  <span class="kt">char</span> <span class="n">heatmap_complete</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">heatmap_stealth_sea</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">heatmap_stealth_land</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>In M.A.X. the grid map size is always 112 x 112 tiles so <code class="language-plaintext highlighter-rouge">x = y = 112;</code> in <code class="language-plaintext highlighter-rouge">heatmap_</code>xyz.</p>
+
+<p>Heat maps are only emitted for valid teams.</p>
+
+<h3 id="serialized-message-log-object-list">Serialized Message Log Object List</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">MessageLog</span>
+<span class="p">{</span>
+  <span class="kt">short</span> <span class="n">length</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">text</span><span class="p">[</span><span class="n">length</span><span class="p">];</span>
+  <span class="n">UnitInfo</span> <span class="n">unit</span><span class="p">;</span>
+  <span class="n">Point</span> <span class="n">coordinates</span><span class="p">;</span>
+  <span class="n">bool</span> <span class="n">is_alert_message</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">resource_id</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">MessageLogList</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">message_log_count</span><span class="p">;</span>
+  <span class="n">MessageLog</span> <span class="n">entires</span><span class="p">[</span><span class="n">message_log_count</span><span class="p">];</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><strong><em>is_alert_message</em></strong>: The <em>coordinates</em> field only contains valid data if this flag is set.</p>
+
+<h3 id="serialized-ai-team-objects">Serialized AI Team Objects</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">enum</span> <span class="n">TeamIndex16</span> <span class="o">:</span> <span class="kt">short</span>
+<span class="p">{</span>
+  <span class="n">TEAM_INDEX_RED</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_GREEN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_BLUE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">TEAM_INDEX_GRAY</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">AiMap</span>
+<span class="p">{</span>
+  <span class="n">UnitInfo</span> <span class="n">unit</span><span class="p">;</span>
+  <span class="n">TeamIndex16</span> <span class="n">team</span><span class="p">;</span>
+  <span class="n">bool</span> <span class="n">visible_to_team</span><span class="p">;</span>
+  <span class="n">Point</span> <span class="n">point</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">AiMapList</span>
+<span class="p">{</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">ai_map_count</span><span class="p">;</span>
+  <span class="n">AiMap</span> <span class="n">objects</span><span class="p">[</span><span class="n">ai_map_count</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">AiPlayer</span>
+<span class="p">{</span>
+  <span class="n">TeamIndex16</span> <span class="n">team</span><span class="p">;</span>
+  <span class="n">AiStrategy</span> <span class="n">strategy</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">field_3</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">field_5</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">field_7</span><span class="p">;</span>
+  <span class="n">TeamIndex16</span> <span class="n">target_team</span><span class="p">;</span>
+  <span class="n">AiMapList</span> <span class="n">map_list</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">has_info_map</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="n">has_info_map</span><span class="p">)</span>
+  <span class="p">{</span>
+  	<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">info_map</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+  <span class="p">}</span>
+  
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">has_mine_map</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="n">has_mine_map</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">mine_map</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+  <span class="p">}</span>
+  
+  <span class="n">Point</span> <span class="n">target_location</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>In M.A.X. the grid map size is always 112 x 112 tiles so <code class="language-plaintext highlighter-rouge">x = y = 112;</code> in the above xyz maps.</p>
+
+<h3 id="complete-save-file">Complete Save File</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span> <span class="n">SaveFile</span>
+<span class="p">{</span>
+  <span class="kt">short</span> <span class="n">version</span><span class="p">;</span>
+  <span class="n">FileType</span> <span class="n">save_file_type</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">save_game_name</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="n">PlanetType</span> <span class="n">planet</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">mission_index</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">team_name_red</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">team_name_green</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">team_name_blue</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="kt">char</span> <span class="n">team_name_gray</span><span class="p">[</span><span class="mi">30</span><span class="p">];</span>
+  <span class="n">TeamType</span> <span class="n">team_type_red</span><span class="p">;</span>
+  <span class="n">TeamType</span> <span class="n">team_type_green</span><span class="p">;</span>
+  <span class="n">TeamType</span> <span class="n">team_type_blue</span><span class="p">;</span>
+  <span class="n">TeamType</span> <span class="n">team_type_gray</span><span class="p">;</span>
+  <span class="n">TeamType</span> <span class="n">team_type_alien</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan_red</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan_green</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan_blue</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan_gray</span><span class="p">;</span>
+  <span class="n">TeamClan</span> <span class="n">team_clan_alien</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">rng_seed</span><span class="p">;</span>
+  <span class="n">OpponentType</span> <span class="n">opponent</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">turn_timer</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">endturn</span><span class="p">;</span>
+  <span class="n">PlayMode</span> <span class="n">play_mode</span><span class="p">;</span>
+  <span class="n">IniOptions</span> <span class="n">options</span><span class="p">;</span>
+  <span class="n">SurfaceType</span> <span class="n">surface_map</span><span class="p">[</span><span class="mi">112</span><span class="o">*</span><span class="mi">112</span><span class="p">];</span>
+  <span class="n">GridResourceMapEntry</span> <span class="n">GridResourceMap</span><span class="p">[</span><span class="mi">112</span><span class="o">*</span><span class="mi">112</span><span class="p">];</span>
+  <span class="n">TeamInfo</span> <span class="n">team_info_red</span><span class="p">;</span>
+  <span class="n">TeamInfo</span> <span class="n">team_info_green</span><span class="p">;</span>
+  <span class="n">TeamInfo</span> <span class="n">team_info_blue</span><span class="p">;</span>
+  <span class="n">TeamInfo</span> <span class="n">team_info_gray</span><span class="p">;</span>
+  <span class="n">TeamIndex</span> <span class="n">active_turn_team</span><span class="p">;</span>
+  <span class="n">TeamIndex</span> <span class="n">player_team</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">turn_counter</span><span class="p">;</span>
+  <span class="kt">short</span> <span class="n">game_state</span><span class="p">;</span>
+  <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">turn_timer</span><span class="p">;</span>
+  <span class="n">IniPreferences</span> <span class="n">preferences</span><span class="p">;</span>
+  <span class="n">TeamUnits</span> <span class="n">team_units_red</span><span class="p">;</span>
+  <span class="n">TeamUnits</span> <span class="n">team_units_green</span><span class="p">;</span>
+  <span class="n">TeamUnits</span> <span class="n">team_units_blue</span><span class="p">;</span>
+  <span class="n">TeamUnits</span> <span class="n">team_units_gray</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">unit_info_list_ground_cover_units</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">unit_info_list_mobile_land_sea_units</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">unit_info_list_stationary_units</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">unit_info_list_mobile_air_units</span><span class="p">;</span>
+  <span class="n">UnitInfoList</span> <span class="n">unit_info_list_particles</span><span class="p">;</span>
+  <span class="n">Hash_UnitInfo</span> <span class="n">hash_map_unit_info</span><span class="p">;</span>
+  <span class="n">Hash_MapHash</span> <span class="n">hash_map_map_hash</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_red</span> <span class="o">!=</span> <span class="n">TEAM_TYPE_NONE</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">TeamHeatMaps</span> <span class="n">heat_maps_red</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_green</span> <span class="o">!=</span> <span class="n">TEAM_TYPE_NONE</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">TeamHeatMaps</span> <span class="n">heat_maps_green</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_blue</span> <span class="o">!=</span> <span class="n">TEAM_TYPE_NONE</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">TeamHeatMaps</span> <span class="n">heat_maps_blue</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_gray</span> <span class="o">!=</span> <span class="n">TEAM_TYPE_NONE</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">TeamHeatMaps</span> <span class="n">heat_maps_gray</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">MessageLogList</span> <span class="n">message_log_red</span><span class="p">;</span>
+  <span class="n">MessageLogList</span> <span class="n">message_log_green</span><span class="p">;</span>
+  <span class="n">MessageLogList</span> <span class="n">message_log_blue</span><span class="p">;</span>
+  <span class="n">MessageLogList</span> <span class="n">message_log_gray</span><span class="p">;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_red</span> <span class="o">==</span> <span class="n">TEAM_TYPE_COMPUTER</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">AiPlayer</span> <span class="n">ai_player_red</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_green</span> <span class="o">==</span> <span class="n">TEAM_TYPE_COMPUTER</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">AiPlayer</span> <span class="n">ai_player_green</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_blue</span> <span class="o">==</span> <span class="n">TEAM_TYPE_COMPUTER</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">AiPlayer</span> <span class="n">ai_player_blue</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">team_type_gray</span> <span class="o">==</span> <span class="n">TEAM_TYPE_COMPUTER</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="n">AiPlayer</span> <span class="n">ai_player_gray</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+<p><a name="ref1"></a>[1] <a href="https://en.wikipedia.org/wiki/Endianness">Endianness</a><br>
+<a name="ref2"></a>[2] M.A.X. User Manual (MC-ICD-082-GEN)<br></p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="footer-min">
+  <div class="text-muted">
+    M.A.X. Port Team
+    &nbsp;&nbsp;•&nbsp;&nbsp;
+    
+      2023
+    
+
+    
+  </div>
+</footer>
+
+
+</body></html>

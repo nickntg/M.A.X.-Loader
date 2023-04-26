@@ -2,6 +2,7 @@
 using System.IO;
 using MAXLoader.Core.Services.Interfaces;
 using MAXLoader.Core.Types;
+using MAXLoader.Core.Types.Constants;
 using MAXLoader.Core.Types.Enums;
 
 namespace MAXLoader.Core.Services
@@ -24,9 +25,44 @@ namespace MAXLoader.Core.Services
 			using (var sr = new StreamReader(fileName))
 			{
 				gameFile.Header = LoadGameFileHeader(sr.BaseStream);
+				gameFile.Options = LoadGameOptions(sr.BaseStream);
+				gameFile.Surface = LoadSurface(sr.BaseStream);
 			}
 
 			return gameFile;
+		}
+
+		private GameSurfaceMap LoadSurface(Stream stream)
+		{
+			var surface = new GameSurfaceMap();
+			for (var y = 1; y <= Globals.MaxMapWidth; y++)
+			{
+				for (var x = 1; x <= Globals.MaxMapHeight; x++)
+				{
+					surface.Surfaces[x-1, y-1] = (SurfaceType)_byteHandler.ReadByte(stream);
+				}
+			}
+
+			return surface;
+		}
+
+		private GameOptionsSection LoadGameOptions(Stream stream)
+		{
+			return new GameOptionsSection
+			{
+				World = (PlanetType)_byteHandler.ReadInt(stream),
+				TurnTimer = _byteHandler.ReadInt(stream),
+				EndTurn = _byteHandler.ReadInt(stream),
+				StartGold = _byteHandler.ReadInt(stream),
+				PlayMode = (PlayMode)_byteHandler.ReadInt(stream),
+				VictoryType = (VictoryType)_byteHandler.ReadInt(stream),
+				VictoryLimit = _byteHandler.ReadInt(stream),
+				OpponentType = (OpponentType)_byteHandler.ReadInt(stream),
+				RawResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
+				FuelResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
+				GoldResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
+				AlienDerelicts = (AlienDerelictsType)_byteHandler.ReadInt(stream)
+			};
 		}
 
 		private GameFileHeader LoadGameFileHeader(Stream stream)

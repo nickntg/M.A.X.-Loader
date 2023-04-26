@@ -17,6 +17,11 @@ namespace MAXLoader.Core.Services
 			return BitConverter.ToInt16(Read(stream, 2));
 		}
 
+		public int ReadInt(Stream stream)
+		{
+			return BitConverter.ToInt32(Read(stream, 4));
+		}
+
 		public byte ReadByte(Stream stream)
 		{
 			return Read(stream, 1)[0];

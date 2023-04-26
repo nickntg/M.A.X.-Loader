@@ -8,6 +8,7 @@ namespace MAXLoader.Core.Services.Interfaces
 		byte ReadByte(Stream stream);
 		string ReadCharArray(Stream stream, int size);
 		uint ReadUInt32(Stream stream);
+		int ReadInt(Stream stream);
 		void Skip(Stream stream, int size);
 	}
 }

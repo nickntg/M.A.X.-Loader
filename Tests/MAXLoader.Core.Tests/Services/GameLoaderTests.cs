@@ -71,5 +71,68 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.Equal(0, game.Header.EndTurn);
 			Assert.Equal(OpponentType.God, game.Header.OpponentType);
 		}
+
+		[Fact]
+		public void ParseOptions()
+		{
+			var loader = new GameLoader(new ByteHandler());
+
+			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+
+			Assert.Equal(PlanetType.FlashPoint, game.Options.World);
+			Assert.Equal(0,game.Options.TurnTimer);
+			Assert.Equal(0, game.Options.EndTurn);
+			Assert.Equal(0, game.Options.StartGold);
+			Assert.Equal(PlayMode.TurnBased, game.Options.PlayMode);
+			Assert.Equal(VictoryType.Duration, game.Options.VictoryType);
+			Assert.Equal(801, game.Options.VictoryLimit);
+			Assert.Equal(OpponentType.God, game.Options.OpponentType);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.RawResource);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.FuelResource);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.GoldResource);
+			Assert.Equal(AlienDerelictsType.None, game.Options.AlienDerelicts);
+		}
+
+		[Fact]
+		public void ParseSurface()
+		{
+			var loader = new GameLoader(new ByteHandler());
+
+			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[0, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[1, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[2, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[3, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[4, 0]);
+			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[5, 0]);
+			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[6, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[7, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[8, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[9, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[10, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[11, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[12, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[13, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[14, 0]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[15, 0]);
+			Assert.Equal(SurfaceType.Coast, game.Surface.Surfaces[1, 54]);
+			Assert.Equal(SurfaceType.Water, game.Surface.Surfaces[1, 55]);
+
+
+
+			Assert.Equal(PlanetType.FlashPoint, game.Options.World);
+			Assert.Equal(0, game.Options.TurnTimer);
+			Assert.Equal(0, game.Options.EndTurn);
+			Assert.Equal(0, game.Options.StartGold);
+			Assert.Equal(PlayMode.TurnBased, game.Options.PlayMode);
+			Assert.Equal(VictoryType.Duration, game.Options.VictoryType);
+			Assert.Equal(801, game.Options.VictoryLimit);
+			Assert.Equal(OpponentType.God, game.Options.OpponentType);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.RawResource);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.FuelResource);
+			Assert.Equal(ResourceLevelType.Rich, game.Options.GoldResource);
+			Assert.Equal(AlienDerelictsType.None, game.Options.AlienDerelicts);
+		}
 	}
 }

@@ -64,5 +64,16 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.Equal(0x04030201L, result);
 			Assert.Equal(4, stream.Position);
 		}
+
+		[Fact]
+		public void ReadInt_WhenCalled_ReturnsCorrectValue()
+		{
+			var stream = new MemoryStream(new byte[] { 0x01, 0x02, 0x00, 0x03 });
+			var byteHandler = new ByteHandler();
+
+			var result = byteHandler.ReadInt(stream);
+
+			Assert.Equal(50332161, result);
+		}
 	}
 }

@@ -2,6 +2,7 @@
 {
 	public enum TeamClan
 	{
+		None = 0,
 		TheChosen = 1,
 		CrimsonPath = 2,
 		VonGriffin = 3,

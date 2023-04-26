@@ -35,14 +35,14 @@ namespace MAXLoader.Core.Services
 			{
 				Version = (FileFormatVersion)_byteHandler.ReadShort(stream),
 				SaveFileType = (SaveFileType)_byteHandler.ReadByte(stream),
-				SaveGameName = _byteHandler.ReadCharArray(stream, 30),
+				SaveGameName = _byteHandler.ReadCharArray(stream, 30).Trim('\0'),
 				PlanetType = (PlanetType)_byteHandler.ReadByte(stream),
 				MissionIndex = _byteHandler.ReadShort(stream)
 			};
 
 			for (var i = 1; i <= 4; i++)
 			{
-				header.TeamNames.Add(_byteHandler.ReadCharArray(stream, 30));
+				header.TeamNames.Add(_byteHandler.ReadCharArray(stream, 30).Trim('\0'));
 			}
 
 			for (var i = 1; i <= 5; i++)
@@ -71,7 +71,7 @@ namespace MAXLoader.Core.Services
 				throw new NotImplementedException("Currently only single player custom games can be loaded");
 			}
 
-			if (!fileName.ToLower().EndsWith(".dta"))
+			if (string.IsNullOrEmpty(fileName) || !fileName.ToLower().EndsWith(".dta"))
 			{
 				throw new NotImplementedException("Currently only single player custom games can be loaded");
 			}

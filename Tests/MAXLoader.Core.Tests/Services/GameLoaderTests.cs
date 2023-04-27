@@ -1,5 +1,6 @@
 ﻿using System;
 using MAXLoader.Core.Services;
+using MAXLoader.Core.Types;
 using MAXLoader.Core.Types.Enums;
 using Xunit;
 
@@ -43,9 +44,7 @@ namespace MAXLoader.Core.Tests.Services
 		[Fact]
 		public void ParseHeader()
 		{
-			var loader = new GameLoader(new ByteHandler());
-
-			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			var game = LoadGameFile();
 
 			Assert.Equal(FileFormatVersion.V70, game.Header.Version);
 			Assert.Equal(SaveFileType.SinglePlayerCustomGame, game.Header.SaveFileType);
@@ -75,9 +74,7 @@ namespace MAXLoader.Core.Tests.Services
 		[Fact]
 		public void ParseOptions()
 		{
-			var loader = new GameLoader(new ByteHandler());
-
-			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			var game = LoadGameFile();
 
 			Assert.Equal(PlanetType.FlashPoint, game.Options.World);
 			Assert.Equal(0,game.Options.TurnTimer);
@@ -96,9 +93,7 @@ namespace MAXLoader.Core.Tests.Services
 		[Fact]
 		public void ParseSurface()
 		{
-			var loader = new GameLoader(new ByteHandler());
-
-			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			var game = LoadGameFile();
 
 			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[0, 0]);
 			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[1, 0]);
@@ -123,9 +118,7 @@ namespace MAXLoader.Core.Tests.Services
 		[Fact]
 		public void ParseSurfaceResources()
 		{
-			var loader = new GameLoader(new ByteHandler());
-
-			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			var game = LoadGameFile();
 
 			Assert.Equal(0, game.GameResources.Resources[27, 94].Amount);
 			Assert.Equal(ResourceType.None, game.GameResources.Resources[27, 94].ResourceType);
@@ -147,6 +140,24 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.False(game.GameResources.Resources[26, 96].BlueTeamVisible);
 			Assert.False(game.GameResources.Resources[26, 96].GreyTeamVisible);
 			Assert.False(game.GameResources.Resources[26, 96].GreenTeamVisible);
+		}
+
+		[Fact]
+		public void ParseTeamInfos()
+		{
+			var game = LoadGameFile();
+
+			Assert.Equal(630, game.TeamInfos[Team.Red].StatsGoldSpentOnUpgrades);
+			Assert.Equal(492, game.TeamInfos[Team.Green].StatsGoldSpentOnUpgrades);
+			Assert.Equal(2564, game.TeamInfos[Team.Blue].StatsGoldSpentOnUpgrades);
+			Assert.Equal(1294, game.TeamInfos[Team.Gray].StatsGoldSpentOnUpgrades);
+		}
+
+		private static GameFile LoadGameFile()
+		{
+			var loader = new GameLoader(new ByteHandler());
+
+			return loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
 		}
 	}
 }

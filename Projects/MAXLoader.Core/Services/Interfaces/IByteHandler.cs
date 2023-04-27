@@ -5,6 +5,7 @@ namespace MAXLoader.Core.Services.Interfaces
 	public interface IByteHandler
 	{
 		short ReadShort(Stream stream);
+		ushort ReadUShort(Stream stream);
 		ushort ReadWord(Stream stream); 
 		byte ReadByte(Stream stream);
 		string ReadCharArray(Stream stream, int size);

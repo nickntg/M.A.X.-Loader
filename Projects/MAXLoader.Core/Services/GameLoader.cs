@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using MAXLoader.Core.Services.Interfaces;
 using MAXLoader.Core.Types;
@@ -28,9 +29,105 @@ namespace MAXLoader.Core.Services
 				gameFile.Options = LoadGameOptions(sr.BaseStream);
 				gameFile.Surface = LoadSurface(sr.BaseStream);
 				gameFile.GameResources = LoadResources(sr.BaseStream);
+				gameFile.TeamInfos = LoadTeamInfos(sr.BaseStream);
 			}
 
 			return gameFile;
+		}
+
+		private Dictionary<Team, TeamInfo> LoadTeamInfos(Stream stream)
+		{
+			return new Dictionary<Team, TeamInfo>
+			{
+				{ Team.Red, LoadTeamInfo(stream) },
+				{ Team.Green, LoadTeamInfo(stream) },
+				{ Team.Blue, LoadTeamInfo(stream) },
+				{ Team.Gray, LoadTeamInfo(stream) }
+			};
+		}
+
+		private TeamInfo LoadTeamInfo(Stream stream)
+		{
+			var ti = new TeamInfo();
+
+			for (var i = 1; i <= Globals.MarkersSize; i++)
+			{
+				ti.Markers[i - 1] = new Point
+				{
+					X = _byteHandler.ReadShort(stream),
+					Y = _byteHandler.ReadShort(stream)
+				};
+			}
+
+			ti.TeamType = (TeamType)_byteHandler.ReadByte(stream);
+			ti.Field41 = _byteHandler.ReadByte(stream);
+			ti.TeamClan = (TeamClan)_byteHandler.ReadByte(stream);
+
+			for (var i = ResearchTopic.Attack; i <= ResearchTopic.Cost; i++)
+			{
+				var researchTopic = new ResearchTopicInfo
+				{
+					ResearchLevel = _byteHandler.ReadUInt32(stream),
+					TurnsToComplete = _byteHandler.ReadUInt32(stream),
+					Allocation = _byteHandler.ReadUInt32(stream)
+				};
+				ti.ResearchTopics.Add(i, researchTopic);
+			}
+
+			ti.VictoryPoints = _byteHandler.ReadUInt32(stream);
+			ti.LastUnitId = _byteHandler.ReadUShort(stream);
+
+			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
+			{
+				ti.UnitCounters.Add(i, _byteHandler.ReadByte(stream));
+			}
+
+			for (var i = 1; i <= Globals.ScreenLocationSize; i++)
+			{
+				var point = new ScreenLocation
+				{
+					X = _byteHandler.ReadByte(stream),
+					Y = _byteHandler.ReadByte(stream)
+				};
+				ti.ScreenLocations[i - 1] = point;
+			}
+
+			for (var i = 1; i <= Globals.ScoreGraphSize; i++)
+			{
+				ti.ScoreGraph[i-1] = _byteHandler.ReadShort(stream);
+			}
+
+			ti.SelectedUnit = _byteHandler.ReadUShort(stream);
+			ti.ZoomLevel = _byteHandler.ReadUShort(stream);
+			ti.ScreenPosition = new Point
+			{
+				X = _byteHandler.ReadShort(stream),
+				Y = _byteHandler.ReadShort(stream)
+			};
+			ti.GuiButtonStateRange = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateScan = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateStatus = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateColors = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateHits = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateAmmo = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateMinimap2X = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateMinimapTnt = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateGrid = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateNames = _byteHandler.ReadByte(stream) != 0;
+			ti.GuiButtonStateSurvey = _byteHandler.ReadByte(stream) != 0;
+			ti.StatsFactoriesBuilt = _byteHandler.ReadShort(stream);
+			ti.StatsMinesBuilt = _byteHandler.ReadShort(stream);
+			ti.StatsBuildingsBuilt = _byteHandler.ReadShort(stream);
+			ti.StatsUnitsBuilt = _byteHandler.ReadShort(stream);
+
+			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
+			{
+				ti.Casualties.Add(i, _byteHandler.ReadUShort(stream));
+			}
+
+			ti.StatsGoldSpentOnUpgrades = _byteHandler.ReadShort(stream);
+
+			return ti;
 		}
 
 		private GameSurfaceResourcesMap LoadResources(Stream stream)

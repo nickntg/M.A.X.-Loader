@@ -7,6 +7,11 @@ namespace MAXLoader.Core.Services
 {
 	public class ByteHandler : IByteHandler
 	{
+		public ushort ReadWord(Stream stream)
+		{
+			return BitConverter.ToUInt16(Read(stream, 2));
+		}
+
 		public void Skip(Stream stream, int size)
 		{
 			Read(stream, size);

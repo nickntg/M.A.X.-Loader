@@ -27,9 +27,38 @@ namespace MAXLoader.Core.Services
 				gameFile.Header = LoadGameFileHeader(sr.BaseStream);
 				gameFile.Options = LoadGameOptions(sr.BaseStream);
 				gameFile.Surface = LoadSurface(sr.BaseStream);
+				gameFile.GameResources = LoadResources(sr.BaseStream);
 			}
 
 			return gameFile;
+		}
+
+		private GameSurfaceResourcesMap LoadResources(Stream stream)
+		{
+			var resources = new GameSurfaceResourcesMap();
+			for (var y = 1; y <= Globals.MaxMapWidth; y++)
+			{
+				for (var x = 1; x <= Globals.MaxMapHeight; x++)
+				{
+					var word = _byteHandler.ReadWord(stream);
+					var resource = new CellResource
+					{
+						Amount = word & 0x1f,
+						ResourceType = (ResourceType)((word & 0xe0) >> 5),
+						RedTeamVisible = (word & 0x2000) != 0,
+						GreenTeamVisible = (word & 0x1000) != 0,
+						BlueTeamVisible = (word & 0x800) != 0,
+						GreyTeamVisible = (word & 0x800) != 0
+					};
+					if (resource.Amount == 0)
+					{
+						resource.ResourceType = ResourceType.None;
+					}
+					resources.Resources[x-1,y-1] = resource;
+				}
+			}
+
+			return resources;
 		}
 
 		private GameSurfaceMap LoadSurface(Stream stream)

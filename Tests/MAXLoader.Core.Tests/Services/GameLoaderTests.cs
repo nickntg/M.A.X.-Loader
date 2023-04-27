@@ -118,21 +118,35 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[15, 0]);
 			Assert.Equal(SurfaceType.Coast, game.Surface.Surfaces[1, 54]);
 			Assert.Equal(SurfaceType.Water, game.Surface.Surfaces[1, 55]);
+		}
 
+		[Fact]
+		public void ParseSurfaceResources()
+		{
+			var loader = new GameLoader(new ByteHandler());
 
+			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
 
-			Assert.Equal(PlanetType.FlashPoint, game.Options.World);
-			Assert.Equal(0, game.Options.TurnTimer);
-			Assert.Equal(0, game.Options.EndTurn);
-			Assert.Equal(0, game.Options.StartGold);
-			Assert.Equal(PlayMode.TurnBased, game.Options.PlayMode);
-			Assert.Equal(VictoryType.Duration, game.Options.VictoryType);
-			Assert.Equal(801, game.Options.VictoryLimit);
-			Assert.Equal(OpponentType.God, game.Options.OpponentType);
-			Assert.Equal(ResourceLevelType.Rich, game.Options.RawResource);
-			Assert.Equal(ResourceLevelType.Rich, game.Options.FuelResource);
-			Assert.Equal(ResourceLevelType.Rich, game.Options.GoldResource);
-			Assert.Equal(AlienDerelictsType.None, game.Options.AlienDerelicts);
+			Assert.Equal(0, game.GameResources.Resources[27, 94].Amount);
+			Assert.Equal(ResourceType.None, game.GameResources.Resources[27, 94].ResourceType);
+			Assert.True(game.GameResources.Resources[27, 94].RedTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 94].BlueTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 94].GreyTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 94].GreenTeamVisible);
+
+			Assert.Equal(4, game.GameResources.Resources[27, 95].Amount);
+			Assert.Equal(ResourceType.Fuel, game.GameResources.Resources[27, 95].ResourceType);
+			Assert.True(game.GameResources.Resources[27, 95].RedTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 95].BlueTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 95].GreyTeamVisible);
+			Assert.False(game.GameResources.Resources[27, 95].GreenTeamVisible);
+
+			Assert.Equal(14, game.GameResources.Resources[26, 96].Amount);
+			Assert.Equal(ResourceType.Raw, game.GameResources.Resources[26, 96].ResourceType);
+			Assert.True(game.GameResources.Resources[26, 96].RedTeamVisible);
+			Assert.False(game.GameResources.Resources[26, 96].BlueTeamVisible);
+			Assert.False(game.GameResources.Resources[26, 96].GreyTeamVisible);
+			Assert.False(game.GameResources.Resources[26, 96].GreenTeamVisible);
 		}
 	}
 }

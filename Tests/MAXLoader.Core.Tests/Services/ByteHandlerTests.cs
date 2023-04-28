@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using MAXLoader.Core.Services;
 using Xunit;
 
@@ -74,6 +75,91 @@ namespace MAXLoader.Core.Tests.Services
 			var result = byteHandler.ReadInt(stream);
 
 			Assert.Equal(50332161, result);
+		}
+
+		[Fact]
+		public void WriteUShort_WritesCorrectValue()
+		{
+			const ushort expected = 0x1234;
+			var stream = new MemoryStream();
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteUShort(stream, expected);
+			stream.Position = 0;
+			var actual = BitConverter.ToUInt16(stream.ToArray(), 0);
+
+			Assert.Equal(expected, actual);
+		}
+
+		[Fact]
+		public void WriteShort_WritesCorrectValue()
+		{
+			var stream = new MemoryStream();
+			const short expectedValue = 123;
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteShort(stream, expectedValue);
+			stream.Position = 0;
+			var actualValue = BitConverter.ToInt16(stream.ToArray(), 0);
+
+			Assert.Equal(expectedValue, actualValue);
+		}
+
+		[Fact]
+		public void WriteInt_WritesCorrectValue()
+		{
+			var stream = new MemoryStream();
+			const int expectedValue = 123;
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteInt(stream, expectedValue);
+			stream.Position = 0;
+			var actualValue = BitConverter.ToInt32(stream.ToArray(), 0);
+
+			Assert.Equal(expectedValue, actualValue);
+		}
+
+		[Fact]
+		public void WriteByte_WritesCorrectValue()
+		{
+			var stream = new MemoryStream();
+			const byte expectedValue = 123;
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteByte(stream, expectedValue);
+			stream.Position = 0;
+			var actualValue = stream.ReadByte();
+
+			Assert.Equal(expectedValue, actualValue);
+		}
+
+		[Fact]
+		public void WriteCharArray_WritesCorrectValue()
+		{
+			var stream = new MemoryStream();
+			const string expectedValue = "abc\0\0";
+			const int size = 5;
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteCharArray(stream, "abc", size);
+			stream.Position = 0;
+			var actualValue = System.Text.Encoding.ASCII.GetString(stream.ToArray(), 0, size);
+
+			Assert.Equal(expectedValue, actualValue);
+		}
+
+		[Fact]
+		public void WriteUInt32_WritesCorrectValue()
+		{
+			var stream = new MemoryStream();
+			const uint expectedValue = 123;
+			var byteHandler = new ByteHandler();
+
+			byteHandler.WriteUInt32(stream, expectedValue);
+			stream.Position = 0;
+			var actualValue = BitConverter.ToUInt32(stream.ToArray(), 0);
+
+			Assert.Equal(expectedValue, actualValue);
 		}
 	}
 }

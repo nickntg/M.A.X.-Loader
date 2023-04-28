@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using MAXLoader.Core.Services;
 using MAXLoader.Core.Types;
 using MAXLoader.Core.Types.Enums;
@@ -8,6 +9,9 @@ namespace MAXLoader.Core.Tests.Services
 {
 	public class GameLoaderTests
 	{
+		private const string GameFileLocation        = "../../../../../data/save1.dta";
+		private const string GameWrittenFileLocation = "../../../../../data/save1.rewritten.dta";
+
 		[Theory]
 		[InlineData(SaveFileType.Text)]
 		[InlineData(SaveFileType.CampaignGame)]
@@ -140,6 +144,8 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.False(game.GameResources.Resources[26, 96].BlueTeamVisible);
 			Assert.False(game.GameResources.Resources[26, 96].GreyTeamVisible);
 			Assert.False(game.GameResources.Resources[26, 96].GreenTeamVisible);
+
+			Assert.True(game.GameResources.Resources[99, 1].GreyTeamVisible);
 		}
 
 		[Fact]
@@ -153,11 +159,36 @@ namespace MAXLoader.Core.Tests.Services
 			Assert.Equal(1294, game.TeamInfos[Team.Gray].StatsGoldSpentOnUpgrades);
 		}
 
+		[Fact]
+		public void WriteSameAsRead()
+		{
+			var loader = new GameLoader(new ByteHandler());
+
+			loader.SaveGameFile(loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, GameFileLocation),
+				GameWrittenFileLocation);
+
+			var bSource = File.ReadAllBytes(GameFileLocation);
+			var bWritten = File.ReadAllBytes(GameWrittenFileLocation);
+
+			Assert.Equal(bSource.Length, bWritten.Length);
+
+			for (var i = 0; i < bSource.Length; i++)
+			{
+				if (bWritten[i] != bSource[i])
+				{
+					if (bSource[i] == 0x80 && bWritten[i] != 0)
+					{
+						Assert.Fail("Files different");
+					}
+				}
+			}
+		}
+
 		private static GameFile LoadGameFile()
 		{
 			var loader = new GameLoader(new ByteHandler());
 
-			return loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			return loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, GameFileLocation);
 		}
 	}
 }

@@ -13,10 +13,10 @@ namespace MAXLoader.Core.Types
 		public Dictionary<ResearchTopic, ResearchTopicInfo> ResearchTopics { get; set; } = new();
 		public uint VictoryPoints { get; set; }
 		public ushort LastUnitId { get; set; }
-		public Dictionary<UnitType, int> UnitCounters { get; set; } = new();
+		public Dictionary<UnitType, byte> UnitCounters { get; set; } = new();
 		public ScreenLocation[] ScreenLocations { get; set; } = new ScreenLocation[Globals.ScreenLocationSize];
 		public short[] ScoreGraph { get; set; } = new short[Globals.ScoreGraphSize];
-		public uint SelectedUnit { get; set; }
+		public ushort SelectedUnit { get; set; }
 		public ushort ZoomLevel { get; set; }
 		public Point ScreenPosition { get; set; }
 		public bool GuiButtonStateRange { get; set; }

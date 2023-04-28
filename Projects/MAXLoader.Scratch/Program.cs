@@ -8,7 +8,8 @@ namespace MAXLoader.Scratch
 		public static void Main(string[] args)
 		{
 			var loader = new GameLoader(new ByteHandler());
-			loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			var game = loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, "../../../../../data/save1.dta");
+			loader.SaveGameFile(game, "../../../../../data/save1.rewritten.dta");
 		}
 	}
 

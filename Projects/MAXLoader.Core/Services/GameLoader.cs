@@ -289,6 +289,8 @@ namespace MAXLoader.Core.Services
 					var word = _byteHandler.ReadUShort(stream);
 					var resource = new CellResource
 					{
+						X = x,
+						Y = y,
 						Amount = word & 0x1f,
 						ResourceType = (ResourceType)((word & 0xe0) >> 5),
 						RedTeamVisible = (word & 0x2000) != 0,
@@ -303,13 +305,6 @@ namespace MAXLoader.Core.Services
 					}
 
 					resources.Resources[x-1,y-1] = resource;
-
-					//var packed = PackResource(resource);
-					//if (packed != word)
-					//{
-					//	Console.WriteLine($"{x},{y}");
-					//	//throw new InvalidOperationException();
-					//}
 				}
 			}
 
@@ -359,11 +354,6 @@ namespace MAXLoader.Core.Services
 				word = word | 0x400;
 			}
 
-			//if (word == 0)
-			//{
-			//	word = 0x80;
-			//}
-
 			return word;
 		}
 
@@ -374,7 +364,12 @@ namespace MAXLoader.Core.Services
 			{
 				for (var x = 1; x <= Globals.MaxMapHeight; x++)
 				{
-					surface.Surfaces[x-1, y-1] = (SurfaceType)_byteHandler.ReadByte(stream);
+					surface.Surfaces[x-1, y-1] = new GameSurfaceCell
+					{
+						X = x,
+						Y = y,
+						SurfaceType = (SurfaceType)_byteHandler.ReadByte(stream)
+					};
 				}
 			}
 
@@ -387,7 +382,7 @@ namespace MAXLoader.Core.Services
 			{
 				for (var x = 1; x <= Globals.MaxMapHeight; x++)
 				{
-					_byteHandler.WriteByte(stream, (byte)surface.Surfaces[x-1, y-1]);
+					_byteHandler.WriteByte(stream, (byte)surface.Surfaces[x-1, y-1].SurfaceType);
 				}
 			}
 		}

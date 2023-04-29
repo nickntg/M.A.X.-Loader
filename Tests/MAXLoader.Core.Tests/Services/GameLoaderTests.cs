@@ -99,24 +99,24 @@ namespace MAXLoader.Core.Tests.Services
 		{
 			var game = LoadGameFile();
 
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[0, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[1, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[2, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[3, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[4, 0]);
-			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[5, 0]);
-			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[6, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[7, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[8, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[9, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[10, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[11, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[12, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[13, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[14, 0]);
-			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[15, 0]);
-			Assert.Equal(SurfaceType.Coast, game.Surface.Surfaces[1, 54]);
-			Assert.Equal(SurfaceType.Water, game.Surface.Surfaces[1, 55]);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[0, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[1, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[2, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[3, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[4, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[5, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Air, game.Surface.Surfaces[6, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[7, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[8, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[9, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[10, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[11, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[12, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[13, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[14, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Land, game.Surface.Surfaces[15, 0].SurfaceType);
+			Assert.Equal(SurfaceType.Coast, game.Surface.Surfaces[1, 54].SurfaceType);
+			Assert.Equal(SurfaceType.Water, game.Surface.Surfaces[1, 55].SurfaceType);
 		}
 
 		[Fact]

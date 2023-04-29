@@ -30,6 +30,7 @@ namespace MAXLoader.Core.Services
 				gameFile.Surface = LoadSurface(sr.BaseStream);
 				gameFile.GameResources = LoadResources(sr.BaseStream);
 				gameFile.TeamInfos = LoadTeamInfos(sr.BaseStream);
+				gameFile.GameManagerState = LoadGameManagerState(sr.BaseStream);
 				gameFile.TheRest = LoadTheRest(sr.BaseStream);
 			}
 
@@ -47,8 +48,44 @@ namespace MAXLoader.Core.Services
 				WriteSurface(sw.BaseStream, game.Surface);
 				WriteResources(sw.BaseStream, game.GameResources);
 				WriteTeamInfos(sw.BaseStream, game.TeamInfos);
+				WriteGameManagerState(sw.BaseStream, game.GameManagerState);
 				WriteTheRest(sw.BaseStream, game.TheRest);
 			}
+		}
+
+		private void WriteGameManagerState(Stream stream, GameManagerState gms)
+		{
+			_byteHandler.WriteByte(stream, (byte)gms.ActiveTurnTeam);
+			_byteHandler.WriteByte(stream, (byte)gms.PlayerTeam);
+			_byteHandler.WriteInt(stream, gms.TurnCounter);
+			_byteHandler.WriteShort(stream, gms.GameState);
+			_byteHandler.WriteShort(stream, gms.TurnTimer);
+			_byteHandler.WriteInt(stream, gms.Effects);
+			_byteHandler.WriteInt(stream, gms.ClickScroll);
+			_byteHandler.WriteInt(stream, gms.QuickScroll);
+			_byteHandler.WriteInt(stream, gms.FastMovement);
+			_byteHandler.WriteInt(stream, gms.FollowUnit);
+			_byteHandler.WriteInt(stream, gms.AutoSelect);
+			_byteHandler.WriteInt(stream, gms.EnemyHalt);
+		}
+
+		private GameManagerState LoadGameManagerState(Stream stream)
+		{
+			return new GameManagerState
+			{
+				ActiveTurnTeam = (Team)_byteHandler.ReadByte(stream),
+				PlayerTeam = (Team)_byteHandler.ReadByte(stream),
+				TurnCounter = _byteHandler.ReadInt(stream),
+				GameState = _byteHandler.ReadShort(stream),
+				TurnTimer = _byteHandler.ReadShort(stream),
+				Effects = _byteHandler.ReadInt(stream),
+				ClickScroll = _byteHandler.ReadInt(stream),
+				QuickScroll = _byteHandler.ReadInt(stream),
+				FastMovement = _byteHandler.ReadInt(stream),
+				FollowUnit = _byteHandler.ReadInt(stream),
+				AutoSelect = _byteHandler.ReadInt(stream),
+				EnemyHalt = _byteHandler.ReadInt(stream)
+			};
 		}
 
 		private static TheRest LoadTheRest(Stream stream)

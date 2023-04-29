@@ -160,6 +160,25 @@ namespace MAXLoader.Core.Tests.Services
 		}
 
 		[Fact]
+		public void ParseGameManagerState()
+		{
+			var game = LoadGameFile();
+
+			Assert.Equal(Team.Red, game.GameManagerState.ActiveTurnTeam);
+			Assert.Equal(Team.Red, game.GameManagerState.PlayerTeam);
+			Assert.Equal(155, game.GameManagerState.TurnCounter);
+			Assert.Equal(8, game.GameManagerState.GameState);
+			Assert.Equal(0, game.GameManagerState.TurnTimer);
+			Assert.Equal(1, game.GameManagerState.Effects);
+			Assert.Equal(0, game.GameManagerState.ClickScroll);
+			Assert.Equal(40, game.GameManagerState.QuickScroll);
+			Assert.Equal(1, game.GameManagerState.FastMovement);
+			Assert.Equal(0, game.GameManagerState.FollowUnit);
+			Assert.Equal(0, game.GameManagerState.AutoSelect);
+			Assert.Equal(1, game.GameManagerState.EnemyHalt);
+		}
+
+		[Fact]
 		public void WriteSameAsRead()
 		{
 			var loader = new GameLoader(new ByteHandler());

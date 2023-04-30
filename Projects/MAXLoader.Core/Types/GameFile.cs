@@ -11,6 +11,7 @@ namespace MAXLoader.Core.Types
 		public GameSurfaceResourcesMap GameResources { get; set; }
 		public Dictionary<Team, TeamInfo> TeamInfos { get; set; }
 		public GameManagerState GameManagerState { get; set; }
+		public Dictionary<Team, TeamUnits> TeamUnits { get; set; }
 		public TheRest TheRest { get; set; }
 	}
 }

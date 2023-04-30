@@ -179,6 +179,21 @@ namespace MAXLoader.Core.Tests.Services
 		}
 
 		[Fact]
+		public void ParseTeamUnits()
+		{
+			var game = LoadGameFile();
+
+			Assert.Equal(4260, game.TeamUnits[Team.Red].Gold);
+			Assert.Equal(3, game.TeamUnits[Team.Green].Gold);
+			Assert.Equal(41, game.TeamUnits[Team.Blue].Gold);
+			Assert.Equal(6, game.TeamUnits[Team.Gray].Gold);
+			Assert.Equal(1, game.TeamUnits[Team.Red].ComplexCount);
+			Assert.Equal(11, game.TeamUnits[Team.Green].ComplexCount);
+			Assert.Equal(17, game.TeamUnits[Team.Blue].ComplexCount);
+			Assert.Equal(19, game.TeamUnits[Team.Gray].ComplexCount);
+		}
+
+		[Fact]
 		public void WriteSameAsRead()
 		{
 			var loader = new GameLoader(new ByteHandler());

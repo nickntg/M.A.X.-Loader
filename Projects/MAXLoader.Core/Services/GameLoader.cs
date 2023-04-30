@@ -31,6 +31,7 @@ namespace MAXLoader.Core.Services
 				gameFile.GameResources = LoadResources(sr.BaseStream);
 				gameFile.TeamInfos = LoadTeamInfos(sr.BaseStream);
 				gameFile.GameManagerState = LoadGameManagerState(sr.BaseStream);
+				gameFile.TeamUnits = LoadTeamUnits(sr.BaseStream);
 				gameFile.TheRest = LoadTheRest(sr.BaseStream);
 			}
 
@@ -49,10 +50,161 @@ namespace MAXLoader.Core.Services
 				WriteResources(sw.BaseStream, game.GameResources);
 				WriteTeamInfos(sw.BaseStream, game.TeamInfos);
 				WriteGameManagerState(sw.BaseStream, game.GameManagerState);
+				WriteTeamUnits(sw.BaseStream, game.TeamUnits);
 				WriteTheRest(sw.BaseStream, game.TheRest);
 			}
 		}
 
+		#region Team units
+		private void WriteTeamUnits(Stream stream, Dictionary<Team, TeamUnits> tus)
+		{
+			for (var t = Team.Red; t <= Team.Gray; t++)
+			{
+				var tu = tus[t];
+
+				if (tu == null)
+				{
+					continue;
+				}
+
+				_byteHandler.WriteShort(stream, tu.Gold);
+				WriteUnitValueDictionary(stream, tu.BaseUnitValues);
+				WriteUnitValueDictionary(stream, tu.CurrentUnitValues);
+				_byteHandler.WriteUShort(stream, tu.ComplexCount);
+
+				for (var i = 1; i <= tu.ComplexCount; i++)
+				{
+					WriteComplex(stream, tu.Complexes[i - 1]);
+				}
+			}
+		}
+
+		private void WriteComplex(Stream stream, Complex complex)
+		{
+			_byteHandler.WriteUShort(stream, complex.ObjectIndex);
+			_byteHandler.WriteUShort(stream, complex.ClassType);
+			_byteHandler.WriteShort(stream, complex.Material);
+			_byteHandler.WriteShort(stream, complex.Fuel);
+			_byteHandler.WriteShort(stream, complex.Gold);
+			_byteHandler.WriteShort(stream, complex.Power);
+			_byteHandler.WriteShort(stream, complex.Workers);
+			_byteHandler.WriteShort(stream, complex.Buildings);
+			_byteHandler.WriteShort(stream, complex.Id);
+		}
+
+		private void WriteUnitValueDictionary(Stream stream, Dictionary<ushort, UnitValue> dict)
+		{
+			foreach (var kvp in dict)
+			{
+				_byteHandler.WriteUShort(stream, kvp.Key);
+				if (kvp.Value == null)
+				{
+					continue;
+				}
+
+				_byteHandler.WriteUShort(stream, kvp.Value.ClassType);
+				_byteHandler.WriteUShort(stream, kvp.Value.Turns);
+				_byteHandler.WriteUShort(stream, kvp.Value.Hits);
+				_byteHandler.WriteUShort(stream, kvp.Value.Armor);
+				_byteHandler.WriteUShort(stream, kvp.Value.Attack);
+				_byteHandler.WriteUShort(stream, kvp.Value.Speed);
+				_byteHandler.WriteUShort(stream, kvp.Value.Range);
+				_byteHandler.WriteUShort(stream, kvp.Value.Rounds);
+				_byteHandler.WriteByte(stream, kvp.Value.MoveAndFire);
+				_byteHandler.WriteUShort(stream, kvp.Value.Scan);
+				_byteHandler.WriteUShort(stream, kvp.Value.Storage);
+				_byteHandler.WriteUShort(stream, kvp.Value.Ammo);
+				_byteHandler.WriteUShort(stream, kvp.Value.AttackRadius);
+				_byteHandler.WriteUShort(stream, kvp.Value.AgentAdjust);
+				_byteHandler.WriteUShort(stream, kvp.Value.Version);
+				_byteHandler.WriteByte(stream, kvp.Value.UnitsBuilt);
+			}
+		}
+
+		private Dictionary<Team, TeamUnits> LoadTeamUnits(Stream stream)
+		{
+			var d = new Dictionary<Team, TeamUnits>();
+			for (var t = Team.Red; t <= Team.Gray; t++)
+			{
+				var tu = new TeamUnits
+				{
+					Gold = _byteHandler.ReadShort(stream),
+					BaseUnitValues = LoadUnitValueDictionary(stream),
+					CurrentUnitValues = LoadUnitValueDictionary(stream),
+					ComplexCount = _byteHandler.ReadUShort(stream)
+				};
+
+				for (var i = 1; i <= tu.ComplexCount; i++)
+				{
+					tu.Complexes.Add(LoadComplex(stream));
+				}
+
+				d.Add(t, tu);
+			}
+
+			return d;
+		}
+
+		private Complex LoadComplex(Stream stream)
+		{
+			return new Complex
+			{
+				ObjectIndex = _byteHandler.ReadUShort(stream),
+				ClassType = _byteHandler.ReadUShort(stream),
+				Material = _byteHandler.ReadShort(stream),
+				Fuel = _byteHandler.ReadShort(stream),
+				Gold = _byteHandler.ReadShort(stream),
+				Power = _byteHandler.ReadShort(stream),
+				Workers = _byteHandler.ReadShort(stream),
+				Buildings = _byteHandler.ReadShort(stream),
+				Id = _byteHandler.ReadShort(stream)
+			};
+		}
+
+		private Dictionary<ushort, UnitValue> LoadUnitValueDictionary(Stream stream)
+		{
+			var d = new Dictionary<ushort, UnitValue>();
+
+			var lastIndex = 0;
+			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
+			{
+				var index = _byteHandler.ReadUShort(stream);
+
+				UnitValue v = null;
+
+				if (index >= lastIndex)
+				{
+					lastIndex = index;
+					v = new UnitValue
+					{
+						ClassType = _byteHandler.ReadUShort(stream),
+						Turns = _byteHandler.ReadUShort(stream),
+						Hits = _byteHandler.ReadUShort(stream),
+						Armor = _byteHandler.ReadUShort(stream),
+						Attack = _byteHandler.ReadUShort(stream),
+						Speed = _byteHandler.ReadUShort(stream),
+						Range = _byteHandler.ReadUShort(stream),
+						Rounds = _byteHandler.ReadUShort(stream),
+						MoveAndFire = _byteHandler.ReadByte(stream),
+						Scan = _byteHandler.ReadUShort(stream),
+						Storage = _byteHandler.ReadUShort(stream),
+						Ammo = _byteHandler.ReadUShort(stream),
+						AttackRadius = _byteHandler.ReadUShort(stream),
+						AgentAdjust = _byteHandler.ReadUShort(stream),
+						Version = _byteHandler.ReadUShort(stream),
+						UnitsBuilt = _byteHandler.ReadByte(stream)
+					};
+				}
+
+				d.Add(index, v);
+			}
+
+			return d;
+		}
+
+		#endregion
+
+		#region Game manager state
 		private void WriteGameManagerState(Stream stream, GameManagerState gms)
 		{
 			_byteHandler.WriteByte(stream, (byte)gms.ActiveTurnTeam);
@@ -87,7 +239,9 @@ namespace MAXLoader.Core.Services
 				EnemyHalt = _byteHandler.ReadInt(stream)
 			};
 		}
+		#endregion
 
+		#region The rest
 		private static TheRest LoadTheRest(Stream stream)
 		{
 			if (stream.Position >= stream.Length)
@@ -109,7 +263,9 @@ namespace MAXLoader.Core.Services
 
 			stream.Write(rest.TheRestOfTheData, 0, rest.TheRestOfTheData.Length);
 		}
+		#endregion
 
+		#region Team infos
 		private Dictionary<Team, TeamInfo> LoadTeamInfos(Stream stream)
 		{
 			return new Dictionary<Team, TeamInfo>
@@ -278,7 +434,9 @@ namespace MAXLoader.Core.Services
 
 			_byteHandler.WriteShort(stream, ti.StatsGoldSpentOnUpgrades);
 		}
+		#endregion
 
+		#region Resources
 		private GameSurfaceResourcesMap LoadResources(Stream stream)
 		{
 			var resources = new GameSurfaceResourcesMap();
@@ -356,7 +514,9 @@ namespace MAXLoader.Core.Services
 
 			return word;
 		}
+		#endregion
 
+		#region Surface
 		private GameSurfaceMap LoadSurface(Stream stream)
 		{
 			var surface = new GameSurfaceMap();
@@ -386,7 +546,9 @@ namespace MAXLoader.Core.Services
 				}
 			}
 		}
+		#endregion
 
+		#region Load game options
 		private GameOptionsSection LoadGameOptions(Stream stream)
 		{
 			return new GameOptionsSection
@@ -421,7 +583,9 @@ namespace MAXLoader.Core.Services
 			_byteHandler.WriteInt(stream, (int)gameOptions.GoldResource);
 			_byteHandler.WriteInt(stream, (int)gameOptions.AlienDerelicts);
 		}
+		#endregion
 
+		#region Header
 		private GameFileHeader LoadGameFileHeader(Stream stream)
 		{
 			var header = new GameFileHeader
@@ -486,6 +650,7 @@ namespace MAXLoader.Core.Services
 			_byteHandler.WriteShort(stream, header.EndTurn);
 			_byteHandler.WriteByte(stream, (byte)header.PlayMode);
 		}
+		#endregion
 
 		private static void ValidateInput(SaveFileType saveFileType, string fileName)
 		{

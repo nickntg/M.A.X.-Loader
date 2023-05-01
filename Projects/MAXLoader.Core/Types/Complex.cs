@@ -11,5 +11,6 @@
 		public short Workers { get; set; }
 		public short Buildings { get; set; }
 		public short Id { get; set; }
+		public bool IsEmpty { get; set; } = false;
 	}
 }

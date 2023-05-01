@@ -19,5 +19,6 @@
 		public ushort AgentAdjust { get; set; }
 		public ushort Version { get; set; }
 		public byte UnitsBuilt { get; set; }
+		public bool IsEmpty { get; set; } = false;
 	}
 }

@@ -12,6 +12,11 @@ namespace MAXLoader.Core.Types
 		public Dictionary<Team, TeamInfo> TeamInfos { get; set; }
 		public GameManagerState GameManagerState { get; set; }
 		public Dictionary<Team, TeamUnits> TeamUnits { get; set; }
+		public UnitInfoList GroundCoverUnits { get; set; }
+		public UnitInfoList MobileLandSeaUnits { get; set; }
+		public UnitInfoList StationaryUnits { get; set; }
+		public UnitInfoList MobileAirUnits { get; set; }
+		public UnitInfoList Particles { get; set; }
 		public TheRest TheRest { get; set; }
 	}
 }

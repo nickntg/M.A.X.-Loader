@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using MAXLoader.Core.Services.Interfaces;
 using MAXLoader.Core.Types;
-using MAXLoader.Core.Types.Constants;
 using MAXLoader.Core.Types.Enums;
+using NLog;
+using Path = MAXLoader.Core.Types.Path;
 
 namespace MAXLoader.Core.Services
 {
-	public class GameLoader : IGameLoader
+	public partial class GameLoader : IGameLoader
 	{
+		private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 		private readonly IByteHandler _byteHandler;
+		private          int          _lastIndex;
 
 		public GameLoader(IByteHandler byteHandler)
 		{
@@ -19,6 +21,7 @@ namespace MAXLoader.Core.Services
 
 		public GameFile LoadGameFile(SaveFileType saveFileType, string fileName)
 		{
+			_lastIndex = 0;
 			ValidateInput(saveFileType, fileName);
 
 			var gameFile = new GameFile();
@@ -32,6 +35,16 @@ namespace MAXLoader.Core.Services
 				gameFile.TeamInfos = LoadTeamInfos(sr.BaseStream);
 				gameFile.GameManagerState = LoadGameManagerState(sr.BaseStream);
 				gameFile.TeamUnits = LoadTeamUnits(sr.BaseStream);
+				Log.Debug("== Ground cover units ==");
+				gameFile.GroundCoverUnits = LoadUnitInfoList(sr.BaseStream);
+				Log.Debug("== Mobile land sea units ==");
+				gameFile.MobileLandSeaUnits = LoadUnitInfoList(sr.BaseStream);
+				Log.Debug("== Stationary units ==");
+				gameFile.StationaryUnits = LoadUnitInfoList(sr.BaseStream);
+				Log.Debug("== Mobile air units ==");
+				gameFile.MobileAirUnits = LoadUnitInfoList(sr.BaseStream);
+				Log.Debug("== Particles ==");
+				gameFile.Particles = LoadUnitInfoList(sr.BaseStream);
 				gameFile.TheRest = LoadTheRest(sr.BaseStream);
 			}
 
@@ -51,623 +64,387 @@ namespace MAXLoader.Core.Services
 				WriteTeamInfos(sw.BaseStream, game.TeamInfos);
 				WriteGameManagerState(sw.BaseStream, game.GameManagerState);
 				WriteTeamUnits(sw.BaseStream, game.TeamUnits);
+				WriteUnitInfoList(sw.BaseStream, game.GroundCoverUnits);
+				WriteUnitInfoList(sw.BaseStream, game.MobileLandSeaUnits);
+				WriteUnitInfoList(sw.BaseStream, game.StationaryUnits);
+				WriteUnitInfoList(sw.BaseStream, game.MobileAirUnits);
+				WriteUnitInfoList(sw.BaseStream, game.Particles);
 				WriteTheRest(sw.BaseStream, game.TheRest);
 			}
 		}
 
-		#region Team units
-		private void WriteTeamUnits(Stream stream, Dictionary<Team, TeamUnits> tus)
+		private void WriteUnitInfoList(Stream stream, UnitInfoList uil)
 		{
-			for (var t = Team.Red; t <= Team.Gray; t++)
+			WriteUShort(stream, uil.UnitInfoCount);
+
+			for (var i = 1; i <= uil.UnitInfoCount; i++)
 			{
-				var tu = tus[t];
-
-				if (tu == null)
-				{
-					continue;
-				}
-
-				_byteHandler.WriteShort(stream, tu.Gold);
-				WriteUnitValueDictionary(stream, tu.BaseUnitValues);
-				WriteUnitValueDictionary(stream, tu.CurrentUnitValues);
-				_byteHandler.WriteUShort(stream, tu.ComplexCount);
-
-				for (var i = 1; i <= tu.ComplexCount; i++)
-				{
-					WriteComplex(stream, tu.Complexes[i - 1]);
-				}
+				WriteUnitInfo(stream, uil.Units[i-1]);
 			}
 		}
 
-		private void WriteComplex(Stream stream, Complex complex)
+		private UnitInfoList LoadUnitInfoList(Stream stream)
 		{
-			_byteHandler.WriteUShort(stream, complex.ObjectIndex);
-			_byteHandler.WriteUShort(stream, complex.ClassType);
-			_byteHandler.WriteShort(stream, complex.Material);
-			_byteHandler.WriteShort(stream, complex.Fuel);
-			_byteHandler.WriteShort(stream, complex.Gold);
-			_byteHandler.WriteShort(stream, complex.Power);
-			_byteHandler.WriteShort(stream, complex.Workers);
-			_byteHandler.WriteShort(stream, complex.Buildings);
-			_byteHandler.WriteShort(stream, complex.Id);
-		}
+			Log.Debug($"LoadUnitInfoList: start, stream position {stream.Position:X}");
 
-		private void WriteUnitValueDictionary(Stream stream, Dictionary<ushort, UnitValue> dict)
-		{
-			foreach (var kvp in dict)
+			var uil = new UnitInfoList
 			{
-				_byteHandler.WriteUShort(stream, kvp.Key);
-				if (kvp.Value == null)
-				{
-					continue;
-				}
-
-				_byteHandler.WriteUShort(stream, kvp.Value.ClassType);
-				_byteHandler.WriteUShort(stream, kvp.Value.Turns);
-				_byteHandler.WriteUShort(stream, kvp.Value.Hits);
-				_byteHandler.WriteUShort(stream, kvp.Value.Armor);
-				_byteHandler.WriteUShort(stream, kvp.Value.Attack);
-				_byteHandler.WriteUShort(stream, kvp.Value.Speed);
-				_byteHandler.WriteUShort(stream, kvp.Value.Range);
-				_byteHandler.WriteUShort(stream, kvp.Value.Rounds);
-				_byteHandler.WriteByte(stream, kvp.Value.MoveAndFire);
-				_byteHandler.WriteUShort(stream, kvp.Value.Scan);
-				_byteHandler.WriteUShort(stream, kvp.Value.Storage);
-				_byteHandler.WriteUShort(stream, kvp.Value.Ammo);
-				_byteHandler.WriteUShort(stream, kvp.Value.AttackRadius);
-				_byteHandler.WriteUShort(stream, kvp.Value.AgentAdjust);
-				_byteHandler.WriteUShort(stream, kvp.Value.Version);
-				_byteHandler.WriteByte(stream, kvp.Value.UnitsBuilt);
-			}
-		}
-
-		private Dictionary<Team, TeamUnits> LoadTeamUnits(Stream stream)
-		{
-			var d = new Dictionary<Team, TeamUnits>();
-			for (var t = Team.Red; t <= Team.Gray; t++)
-			{
-				var tu = new TeamUnits
-				{
-					Gold = _byteHandler.ReadShort(stream),
-					BaseUnitValues = LoadUnitValueDictionary(stream),
-					CurrentUnitValues = LoadUnitValueDictionary(stream),
-					ComplexCount = _byteHandler.ReadUShort(stream)
-				};
-
-				for (var i = 1; i <= tu.ComplexCount; i++)
-				{
-					tu.Complexes.Add(LoadComplex(stream));
-				}
-
-				d.Add(t, tu);
-			}
-
-			return d;
-		}
-
-		private Complex LoadComplex(Stream stream)
-		{
-			return new Complex
-			{
-				ObjectIndex = _byteHandler.ReadUShort(stream),
-				ClassType = _byteHandler.ReadUShort(stream),
-				Material = _byteHandler.ReadShort(stream),
-				Fuel = _byteHandler.ReadShort(stream),
-				Gold = _byteHandler.ReadShort(stream),
-				Power = _byteHandler.ReadShort(stream),
-				Workers = _byteHandler.ReadShort(stream),
-				Buildings = _byteHandler.ReadShort(stream),
-				Id = _byteHandler.ReadShort(stream)
+				UnitInfoCount = ReadUShort(stream)
 			};
-		}
 
-		private Dictionary<ushort, UnitValue> LoadUnitValueDictionary(Stream stream)
-		{
-			var d = new Dictionary<ushort, UnitValue>();
-
-			var lastIndex = 0;
-			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
+			for (var i = 1; i <= uil.UnitInfoCount; i++)
 			{
-				var index = _byteHandler.ReadUShort(stream);
+				Log.Debug($"LoadUnitInfoList: start #{i-1}, stream position {stream.Position:X}");
 
-				UnitValue v = null;
+				uil.Units.Add(LoadUnitInfo(stream));
 
-				if (index >= lastIndex)
-				{
-					lastIndex = index;
-					v = new UnitValue
-					{
-						ClassType = _byteHandler.ReadUShort(stream),
-						Turns = _byteHandler.ReadUShort(stream),
-						Hits = _byteHandler.ReadUShort(stream),
-						Armor = _byteHandler.ReadUShort(stream),
-						Attack = _byteHandler.ReadUShort(stream),
-						Speed = _byteHandler.ReadUShort(stream),
-						Range = _byteHandler.ReadUShort(stream),
-						Rounds = _byteHandler.ReadUShort(stream),
-						MoveAndFire = _byteHandler.ReadByte(stream),
-						Scan = _byteHandler.ReadUShort(stream),
-						Storage = _byteHandler.ReadUShort(stream),
-						Ammo = _byteHandler.ReadUShort(stream),
-						AttackRadius = _byteHandler.ReadUShort(stream),
-						AgentAdjust = _byteHandler.ReadUShort(stream),
-						Version = _byteHandler.ReadUShort(stream),
-						UnitsBuilt = _byteHandler.ReadByte(stream)
-					};
-				}
-
-				d.Add(index, v);
+				Log.Debug($"LoadUnitInfoList: end #{i - 1}, stream position {stream.Position:X}");
 			}
 
-			return d;
+			Log.Debug($"LoadUnitInfoList: end, stream position {stream.Position:X}");
+
+			return uil;
 		}
 
-		#endregion
-
-		#region Game manager state
-		private void WriteGameManagerState(Stream stream, GameManagerState gms)
+		private void WriteUnitInfo(Stream stream, UnitInfo ui)
 		{
-			_byteHandler.WriteByte(stream, (byte)gms.ActiveTurnTeam);
-			_byteHandler.WriteByte(stream, (byte)gms.PlayerTeam);
-			_byteHandler.WriteInt(stream, gms.TurnCounter);
-			_byteHandler.WriteShort(stream, gms.GameState);
-			_byteHandler.WriteShort(stream, gms.TurnTimer);
-			_byteHandler.WriteInt(stream, gms.Effects);
-			_byteHandler.WriteInt(stream, gms.ClickScroll);
-			_byteHandler.WriteInt(stream, gms.QuickScroll);
-			_byteHandler.WriteInt(stream, gms.FastMovement);
-			_byteHandler.WriteInt(stream, gms.FollowUnit);
-			_byteHandler.WriteInt(stream, gms.AutoSelect);
-			_byteHandler.WriteInt(stream, gms.EnemyHalt);
-		}
-
-		private GameManagerState LoadGameManagerState(Stream stream)
-		{
-			return new GameManagerState
-			{
-				ActiveTurnTeam = (Team)_byteHandler.ReadByte(stream),
-				PlayerTeam = (Team)_byteHandler.ReadByte(stream),
-				TurnCounter = _byteHandler.ReadInt(stream),
-				GameState = _byteHandler.ReadShort(stream),
-				TurnTimer = _byteHandler.ReadShort(stream),
-				Effects = _byteHandler.ReadInt(stream),
-				ClickScroll = _byteHandler.ReadInt(stream),
-				QuickScroll = _byteHandler.ReadInt(stream),
-				FastMovement = _byteHandler.ReadInt(stream),
-				FollowUnit = _byteHandler.ReadInt(stream),
-				AutoSelect = _byteHandler.ReadInt(stream),
-				EnemyHalt = _byteHandler.ReadInt(stream)
-			};
-		}
-		#endregion
-
-		#region The rest
-		private static TheRest LoadTheRest(Stream stream)
-		{
-			if (stream.Position >= stream.Length)
-			{
-				return null;
-			}
-
-			var theRest = new TheRest { TheRestOfTheData = new byte[stream.Length - stream.Position] };
-			var _ = stream.Read(theRest.TheRestOfTheData, 0, (int)(stream.Length - stream.Position));
-			return theRest;
-		}
-
-		private static void WriteTheRest(Stream stream, TheRest rest)
-		{
-			if (rest == null)
+			WriteUShort(stream, ui.ObjectIndex);
+			if (ui.IsEmpty)
 			{
 				return;
 			}
 
-			stream.Write(rest.TheRestOfTheData, 0, rest.TheRestOfTheData.Length);
-		}
-		#endregion
-
-		#region Team infos
-		private Dictionary<Team, TeamInfo> LoadTeamInfos(Stream stream)
-		{
-			return new Dictionary<Team, TeamInfo>
+			WriteUShort(stream, (ushort)ui.ClassType);
+			WriteUShort(stream, (ushort)ui.UnitType);
+			WriteUShort(stream, ui.HashId);
+			WriteUInt32(stream, ui.Flags);
+			WritePoint(stream, ui.PixelPosition);
+			WritePoint(stream, ui.GridPosition);
+			WriteUShort(stream, ui.NameLength);
+			_byteHandler.WriteCharArray(stream, ui.Name, ui.NameLength);
+			WritePoint(stream, ui.ShadowOffset);
+			WriteByte(stream, (byte)ui.TeamIndex);
+			WriteByte(stream, ui.NameIndex);
+			WriteByte(stream, ui.Brightness);
+			WriteByte(stream, ui.Angle);
+			for (var i = 1; i <= 5; i++)
 			{
-				{ Team.Red, LoadTeamInfo(stream) },
-				{ Team.Green, LoadTeamInfo(stream) },
-				{ Team.Blue, LoadTeamInfo(stream) },
-				{ Team.Gray, LoadTeamInfo(stream) }
+				WriteByte(stream, ui.VisibleToTeam[i-1]);
+			}
+			for (var i = 1; i <= 5; i++)
+			{
+				WriteByte(stream, ui.SpottedByTeam[i-1]);
+			}
+
+			WriteByte(stream, ui.MaxVelocity);
+			WriteByte(stream, ui.Velocity);
+			WriteByte(stream, ui.Sound);
+			WriteByte(stream, ui.ScalerAdjust);
+			WriteRect(stream, ui.SpriteBounds);
+			WriteRect(stream, ui.ShadowBounds);
+			WriteByte(stream, ui.TurretAngle);
+			WriteByte(stream, ui.TurretOffsetX);
+			WriteByte(stream, ui.TurretOffsetY);
+			WriteUShort(stream, ui.TotalImages);
+			WriteUShort(stream, ui.ImageBase);
+			WriteUShort(stream, ui.TurretImageBase);
+			WriteUShort(stream, ui.FiringImageBase);
+			WriteUShort(stream, ui.ConnectorImageBase);
+			WriteUShort(stream, ui.ImageIndex);
+			WriteUShort(stream, ui.TurretImageIndex);
+			WriteUShort(stream, ui.ImageIndexMax);
+			WriteByte(stream, (byte)ui.Orders);
+			WriteByte(stream, ui.State);
+			WriteByte(stream, (byte)ui.PriorOrders);
+			WriteByte(stream, ui.PriorState);
+			WriteByte(stream, ui.LayingState);
+			WritePoint(stream, ui.TargetGrid);
+			WriteByte(stream, ui.BuildTime);
+			WriteByte(stream, ui.TotalMining);
+			WriteByte(stream, ui.RawMining);
+			WriteByte(stream, ui.FuelMining);
+			WriteByte(stream, ui.GoldMining);
+			WriteByte(stream, ui.RawMiningMax);
+			WriteByte(stream, ui.GoldMiningMax);
+			WriteByte(stream, ui.FuelMiningMax);
+			WriteByte(stream, ui.Hits);
+			WriteByte(stream, ui.Speed);
+			WriteByte(stream, ui.Shots);
+			WriteByte(stream, ui.MoveAndFire);
+			WriteUShort(stream, ui.Storage);
+			WriteByte(stream, ui.Ammo);
+			WriteByte(stream, ui.TargetingMode);
+			WriteByte(stream, ui.EnterMode);
+			WriteByte(stream, ui.Cursor);
+			WriteByte(stream, ui.RecoilDelay);
+			WriteByte(stream, ui.DelayedReaction);
+			WriteByte(stream, ui.DamagedThisTurn);
+			WriteByte(stream, ui.ResearchTopic);
+			WriteByte(stream, ui.Moved);
+			WriteByte(stream, ui.Bobbed);
+			WriteByte(stream, ui.ShakeEffectState);
+			WriteByte(stream, ui.Engine);
+			WriteByte(stream, ui.Weapon);
+			WriteByte(stream, ui.Comm);
+			WriteByte(stream, ui.FuelDistance);
+			WriteByte(stream, ui.MoveFraction);
+			WriteByte(stream, ui.Energized);
+			WriteByte(stream, ui.RepeatBuild);
+			WriteUShort(stream, ui.BuildRate);
+			WriteByte(stream, ui.DisabledReactionFire);
+			WriteByte(stream, ui.AutoSurvey);
+			WriteUInt32(stream, ui.Field221);
+			WritePath(stream, ui.Path);
+			WriteUShort(stream, ui.Connectors);
+			WriteUnitValue(stream, ui.UnitValue);
+			WriteComplex(stream, ui.Complex);
+			WriteUnitInfo(stream, ui.ParentUnit);
+			WriteUnitInfo(stream, ui.EnemyUnit);
+			WriteUnitTypeArray(stream, ui.UnitTypeArray);
+		}
+
+		private UnitInfo LoadUnitInfo(Stream stream)
+		{
+			var index = ReadUShort(stream);
+			var ui = new UnitInfo { ObjectIndex = index };
+
+			if (index >= _lastIndex)
+			{
+				_lastIndex = index;
+
+				ui.ClassType = (ClassType)ReadUShort(stream);
+				ui.UnitType = (UnitType)ReadUShort(stream);
+				ui.HashId = ReadUShort(stream);
+				ui.Flags = ReadUInt32(stream);
+				ui.PixelPosition = ReadPoint(stream);
+				ui.GridPosition = ReadPoint(stream);
+				ui.NameLength = ReadUShort(stream);
+				ui.Name = _byteHandler.ReadCharArray(stream, ui.NameLength);
+				ui.ShadowOffset = ReadPoint(stream);
+				ui.TeamIndex = (Team)ReadByte(stream);
+				ui.NameIndex = ReadByte(stream);
+				ui.Brightness = ReadByte(stream);
+				ui.Angle = ReadByte(stream);
+				for (var i = 1; i <= 5; i++)
+				{
+					ui.VisibleToTeam[i - 1] = ReadByte(stream);
+				}
+				for (var i = 1; i <= 5; i++)
+				{
+					ui.SpottedByTeam[i - 1] = ReadByte(stream);
+				}
+
+				ui.MaxVelocity = ReadByte(stream);
+				ui.Velocity = ReadByte(stream);
+				ui.Sound = ReadByte(stream);
+				ui.ScalerAdjust = ReadByte(stream);
+				ui.SpriteBounds = ReadRect(stream);
+				ui.ShadowBounds = ReadRect(stream);
+				ui.TurretAngle = ReadByte(stream);
+				ui.TurretOffsetX = ReadByte(stream);
+				ui.TurretOffsetY = ReadByte(stream);
+				ui.TotalImages = ReadUShort(stream);
+				ui.ImageBase = ReadUShort(stream);
+				ui.TurretImageBase = ReadUShort(stream);
+				ui.FiringImageBase = ReadUShort(stream);
+				ui.ConnectorImageBase = ReadUShort(stream);
+				ui.ImageIndex = ReadUShort(stream);
+				ui.TurretImageIndex = ReadUShort(stream);
+				ui.ImageIndexMax = ReadUShort(stream);
+				ui.Orders = (OrderType)ReadByte(stream);
+				ui.State = ReadByte(stream);
+				ui.PriorOrders = (OrderType)ReadByte(stream);
+				ui.PriorState = ReadByte(stream);
+				ui.LayingState = ReadByte(stream);
+				ui.TargetGrid = ReadPoint(stream);
+				ui.BuildTime = ReadByte(stream);
+				ui.TotalMining = ReadByte(stream);
+				ui.RawMining = ReadByte(stream);
+				ui.FuelMining = ReadByte(stream);
+				ui.GoldMining = ReadByte(stream);
+				ui.RawMiningMax = ReadByte(stream);
+				ui.GoldMiningMax = ReadByte(stream);
+				ui.FuelMiningMax = ReadByte(stream);
+				ui.Hits = ReadByte(stream);
+				ui.Speed = ReadByte(stream);
+				ui.Shots = ReadByte(stream);
+				ui.MoveAndFire = ReadByte(stream);
+				ui.Storage = ReadUShort(stream);
+				ui.Ammo = ReadByte(stream);
+				ui.TargetingMode = ReadByte(stream);
+				ui.EnterMode = ReadByte(stream);
+				ui.Cursor = ReadByte(stream);
+				ui.RecoilDelay = ReadByte(stream);
+				ui.DelayedReaction = ReadByte(stream);
+				ui.DamagedThisTurn = ReadByte(stream);
+				ui.ResearchTopic = ReadByte(stream);
+				ui.Moved = ReadByte(stream);
+				ui.Bobbed = ReadByte(stream);
+				ui.ShakeEffectState = ReadByte(stream);
+				ui.Engine = ReadByte(stream);
+				ui.Weapon = ReadByte(stream);
+				ui.Comm = ReadByte(stream);
+				ui.FuelDistance = ReadByte(stream);
+				ui.MoveFraction = ReadByte(stream);
+				ui.Energized = ReadByte(stream);
+				ui.RepeatBuild = ReadByte(stream);
+				ui.BuildRate = ReadUShort(stream);
+				ui.DisabledReactionFire = ReadByte(stream);
+				ui.AutoSurvey = ReadByte(stream);
+				ui.Field221 = ReadUInt32(stream);
+				ui.Path = LoadPath(stream);
+				ui.Connectors = ReadUShort(stream);
+				ui.UnitValue = LoadUnitValue(stream);
+				ui.Complex = LoadComplex(stream);
+				ui.ParentUnit = LoadUnitInfo(stream);
+				ui.EnemyUnit = LoadUnitInfo(stream);
+				ui.UnitTypeArray = LoadUnitTypeArray(stream);
+			}
+			else
+			{
+				ui.IsEmpty = true;
+			}
+
+			return ui;
+		}
+
+		private void WriteUnitTypeArray(Stream stream, UnitTypeArray uta)
+		{
+			WriteUShort(stream, uta.ObjectCount);
+			
+			for (var i = 1; i <= uta.ObjectCount; i++)
+			{
+				WriteUShort(stream, (ushort)uta.Array[i-1]);
+			}
+		}
+
+		private UnitTypeArray LoadUnitTypeArray(Stream stream)
+		{
+			var uta = new UnitTypeArray
+			{
+				ObjectCount = ReadUShort(stream)
 			};
+
+			for (var i = 1; i <= uta.ObjectCount; i++)
+			{
+				uta.Array.Add((UnitType)ReadUShort(stream));
+			}
+
+			return uta;
 		}
 
-		private TeamInfo LoadTeamInfo(Stream stream)
+		private void WritePath(Stream stream, Path path)
 		{
-			var ti = new TeamInfo();
-
-			for (var i = 1; i <= Globals.MarkersSize; i++)
+			WriteUShort(stream, path.ObjectIndex);
+			if (path.IsEmpty)
 			{
-				ti.Markers[i - 1] = new Point
-				{
-					X = _byteHandler.ReadShort(stream),
-					Y = _byteHandler.ReadShort(stream)
-				};
+				return;
 			}
 
-			ti.TeamType = (TeamType)_byteHandler.ReadByte(stream);
-			ti.Field41 = _byteHandler.ReadByte(stream);
-			ti.TeamClan = (TeamClan)_byteHandler.ReadByte(stream);
-
-			for (var i = ResearchTopic.Attack; i <= ResearchTopic.Cost; i++)
+			WriteShort(stream, (short)path.ClassType);
+			switch (path.ClassType)
 			{
-				var researchTopic = new ResearchTopicInfo
-				{
-					ResearchLevel = _byteHandler.ReadUInt32(stream),
-					TurnsToComplete = _byteHandler.ReadUInt32(stream),
-					Allocation = _byteHandler.ReadUInt32(stream)
-				};
-				ti.ResearchTopics.Add(i, researchTopic);
-			}
-
-			ti.VictoryPoints = _byteHandler.ReadUInt32(stream);
-			ti.LastUnitId = _byteHandler.ReadUShort(stream);
-
-			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
-			{
-				ti.UnitCounters.Add(i, _byteHandler.ReadByte(stream));
-			}
-
-			for (var i = 1; i <= Globals.ScreenLocationSize; i++)
-			{
-				var point = new ScreenLocation
-				{
-					X = _byteHandler.ReadByte(stream),
-					Y = _byteHandler.ReadByte(stream)
-				};
-				ti.ScreenLocations[i - 1] = point;
-			}
-
-			for (var i = 1; i <= Globals.ScoreGraphSize; i++)
-			{
-				ti.ScoreGraph[i-1] = _byteHandler.ReadShort(stream);
-			}
-
-			ti.SelectedUnit = _byteHandler.ReadUShort(stream);
-			ti.ZoomLevel = _byteHandler.ReadUShort(stream);
-			ti.ScreenPosition = new Point
-			{
-				X = _byteHandler.ReadShort(stream),
-				Y = _byteHandler.ReadShort(stream)
-			};
-			ti.GuiButtonStateRange = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateScan = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateStatus = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateColors = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateHits = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateAmmo = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateMinimap2X = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateMinimapTnt = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateGrid = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateNames = _byteHandler.ReadByte(stream) != 0;
-			ti.GuiButtonStateSurvey = _byteHandler.ReadByte(stream) != 0;
-			ti.StatsFactoriesBuilt = _byteHandler.ReadShort(stream);
-			ti.StatsMinesBuilt = _byteHandler.ReadShort(stream);
-			ti.StatsBuildingsBuilt = _byteHandler.ReadShort(stream);
-			ti.StatsUnitsBuilt = _byteHandler.ReadShort(stream);
-
-			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
-			{
-				ti.Casualties.Add(i, _byteHandler.ReadUShort(stream));
-			}
-
-			ti.StatsGoldSpentOnUpgrades = _byteHandler.ReadShort(stream);
-
-			return ti;
-		}
-
-		private void WriteTeamInfos(Stream stream, Dictionary<Team, TeamInfo> teamInfos)
-		{
-			WriteTeamInfo(stream, teamInfos[Team.Red]);
-			WriteTeamInfo(stream, teamInfos[Team.Green]);
-			WriteTeamInfo(stream, teamInfos[Team.Blue]);
-			WriteTeamInfo(stream, teamInfos[Team.Gray]);
-		}
-
-		private void WriteTeamInfo(Stream stream, TeamInfo ti)
-		{
-			for (var i = 1; i <= Globals.MarkersSize; i++)
-			{
-				_byteHandler.WriteShort(stream, ti.Markers[i - 1].X);
-				_byteHandler.WriteShort(stream, ti.Markers[i - 1].Y);
-			}
-
-			_byteHandler.WriteByte(stream, (byte)ti.TeamType);
-			_byteHandler.WriteByte(stream, ti.Field41);
-			_byteHandler.WriteByte(stream, (byte)ti.TeamClan);
-
-			for (var i = ResearchTopic.Attack; i <= ResearchTopic.Cost; i++)
-			{
-				_byteHandler.WriteUInt32(stream, ti.ResearchTopics[i].ResearchLevel);
-				_byteHandler.WriteUInt32(stream, ti.ResearchTopics[i].TurnsToComplete);
-				_byteHandler.WriteUInt32(stream, ti.ResearchTopics[i].Allocation);
-			}
-
-			_byteHandler.WriteUInt32(stream, ti.VictoryPoints);
-			_byteHandler.WriteUShort(stream, ti.LastUnitId);
-
-			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
-			{
-				_byteHandler.WriteByte(stream, ti.UnitCounters[i]);
-			}
-
-			for (var i = 1; i <= Globals.ScreenLocationSize; i++)
-			{
-				_byteHandler.WriteByte(stream, ti.ScreenLocations[i - 1].X);
-				_byteHandler.WriteByte(stream, ti.ScreenLocations[i - 1].Y);
-			}
-
-			for (var i = 1; i <= Globals.ScoreGraphSize; i++)
-			{
-				_byteHandler.WriteShort(stream, ti.ScoreGraph[i-1]);
-			}
-
-			_byteHandler.WriteUShort(stream, ti.SelectedUnit);
-			_byteHandler.WriteUShort(stream, ti.ZoomLevel);
-			_byteHandler.WriteShort(stream, ti.ScreenPosition.X);
-			_byteHandler.WriteShort(stream, ti.ScreenPosition.Y);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateRange ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateScan ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateStatus ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateColors ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateHits ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateAmmo ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateMinimap2X ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateMinimapTnt ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateGrid ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateNames ? (byte)1 : (byte)0);
-			_byteHandler.WriteByte(stream, ti.GuiButtonStateSurvey ? (byte)1 : (byte)0);
-			_byteHandler.WriteShort(stream, ti.StatsFactoriesBuilt);
-			_byteHandler.WriteShort(stream, ti.StatsMinesBuilt);
-			_byteHandler.WriteShort(stream, ti.StatsBuildingsBuilt);
-			_byteHandler.WriteShort(stream, ti.StatsUnitsBuilt);
-
-			for (var i = UnitType.GoldRefinery; i <= UnitType.DeadWaldo; i++)
-			{
-				_byteHandler.WriteUShort(stream, ti.Casualties[i]);
-			}
-
-			_byteHandler.WriteShort(stream, ti.StatsGoldSpentOnUpgrades);
-		}
-		#endregion
-
-		#region Resources
-		private GameSurfaceResourcesMap LoadResources(Stream stream)
-		{
-			var resources = new GameSurfaceResourcesMap();
-			for (var y = 1; y <= Globals.MaxMapWidth; y++)
-			{
-				for (var x = 1; x <= Globals.MaxMapHeight; x++)
-				{
-					var word = _byteHandler.ReadUShort(stream);
-					var resource = new CellResource
+				case ClassType.AirPath:
+					if (path.PathClass is not PathAir c)
 					{
-						X = x,
-						Y = y,
-						Amount = word & 0x1f,
-						ResourceType = (ResourceType)((word & 0xe0) >> 5),
-						RedTeamVisible = (word & 0x2000) != 0,
-						GreenTeamVisible = (word & 0x1000) != 0,
-						BlueTeamVisible = (word & 0x800) != 0,
-						GreyTeamVisible = (word & 0x400) != 0
-					};
-
-					if (resource.Amount == 0)
-					{
-						resource.ResourceType = ResourceType.None;
+						throw new InvalidOperationException("Could not cast PathClass to PathAir");
 					}
 
-					resources.Resources[x-1,y-1] = resource;
-				}
-			}
-
-			return resources;
-		}
-
-		private void WriteResources(Stream stream, GameSurfaceResourcesMap resources)
-		{
-			for (var y = 1; y <= Globals.MaxMapWidth; y++)
-			{
-				for (var x = 1; x <= Globals.MaxMapHeight; x++)
-				{
-					var word = PackResource(resources.Resources[x - 1, y - 1]);
-
-					_byteHandler.WriteUShort(stream, (ushort)word);
-				}
-			}
-		}
-
-		private static int PackResource(CellResource resource)
-		{
-			var word = resource.Amount;
-
-			if (resource.Amount == 0)
-			{
-				resource.ResourceType = ResourceType.Raw;
-			}
-
-			word = word | (((byte)resource.ResourceType) << 5);
-			if (resource.RedTeamVisible)
-			{
-				word = word | 0x2000;
-			}
-
-			if (resource.GreenTeamVisible)
-			{
-				word = word | 0x1000;
-			}
-
-			if (resource.BlueTeamVisible)
-			{
-				word = word | 0x800;
-			}
-
-			if (resource.GreyTeamVisible)
-			{
-				word = word | 0x400;
-			}
-
-			return word;
-		}
-		#endregion
-
-		#region Surface
-		private GameSurfaceMap LoadSurface(Stream stream)
-		{
-			var surface = new GameSurfaceMap();
-			for (var y = 1; y <= Globals.MaxMapWidth; y++)
-			{
-				for (var x = 1; x <= Globals.MaxMapHeight; x++)
-				{
-					surface.Surfaces[x-1, y-1] = new GameSurfaceCell
+					WriteShort(stream, c.Length);
+					WriteByte(stream, c.Angle);
+					WritePoint(stream, c.PixelStart);
+					WritePoint(stream, c.PixelEnd);
+					WriteInt(stream, c.XStep);
+					WriteInt(stream, c.YStep);
+					WriteInt(stream, c.DeltaX);
+					WriteInt(stream, c.DeltaY);
+					break;
+				case ClassType.GroundPath:
+					if (path.PathClass is not PathGround g)
 					{
-						X = x,
-						Y = y,
-						SurfaceType = (SurfaceType)_byteHandler.ReadByte(stream)
+						throw new InvalidOperationException("Could not cast PathClass to PathGround");
+					}
+
+					WritePoint(stream, g.PixelEnd);
+					WriteShort(stream, g.Index);
+					WriteShort(stream, g.StepsCount);
+
+					for (var i = 1; i <= g.StepsCount; i++)
+					{
+						WriteByte(stream, g.Steps[i - 1].X);
+						WriteByte(stream, g.Steps[i - 1].Y);
+					}
+					break;
+				case ClassType.BuilderPath:
+					if (path.PathClass is not PathBuilder b)
+					{
+						throw new InvalidOperationException("Could not cast PathClass to PathBuilder");
+					}
+
+					WritePoint(stream, b.Coordinate);
+					break;
+			}
+		}
+
+		private Path LoadPath(Stream stream)
+		{
+			var path = new Path
+			{
+				ObjectIndex = ReadUShort(stream)
+			};
+
+			if (path.ObjectIndex < _lastIndex)
+			{
+				path.IsEmpty = true;
+				return path;
+			}
+
+			_lastIndex = path.ObjectIndex;
+
+			path.ClassType = (ClassType)ReadShort(stream);
+			switch (path.ClassType)
+			{
+				case ClassType.AirPath:
+					path.PathClass = new PathAir
+					{
+						Length = ReadShort(stream),
+						Angle = ReadByte(stream),
+						PixelStart = ReadPoint(stream),
+						PixelEnd = ReadPoint(stream),
+						XStep = ReadInt(stream),
+						YStep = ReadInt(stream),
+						DeltaX = ReadInt(stream),
+						DeltaY = ReadInt(stream)
 					};
-				}
+					break;
+				case ClassType.GroundPath:
+					var ground = new PathGround
+					{
+						PixelEnd = ReadPoint(stream),
+						Index = ReadShort(stream),
+						StepsCount = ReadShort(stream)
+					};
+					for (var i = 1; i <= ground.StepsCount; i++)
+					{
+						ground.Steps.Add(new PathStep
+						{
+							X = ReadByte(stream),
+							Y = ReadByte(stream),
+						});
+					}
+					path.PathClass = ground;
+					break;
+				case ClassType.BuilderPath:
+					path.PathClass = new PathBuilder
+					{
+						Coordinate = ReadPoint(stream)
+					};
+					break;
+				default:
+					throw new InvalidOperationException($"Unknown path class {path.ClassType}");
 			}
 
-			return surface;
-		}
-
-		private void WriteSurface(Stream stream, GameSurfaceMap surface)
-		{
-			for (var y = 1; y <= Globals.MaxMapWidth; y++)
-			{
-				for (var x = 1; x <= Globals.MaxMapHeight; x++)
-				{
-					_byteHandler.WriteByte(stream, (byte)surface.Surfaces[x-1, y-1].SurfaceType);
-				}
-			}
-		}
-		#endregion
-
-		#region Load game options
-		private GameOptionsSection LoadGameOptions(Stream stream)
-		{
-			return new GameOptionsSection
-			{
-				World = (PlanetType)_byteHandler.ReadInt(stream),
-				TurnTimer = _byteHandler.ReadInt(stream),
-				EndTurn = _byteHandler.ReadInt(stream),
-				StartGold = _byteHandler.ReadInt(stream),
-				PlayMode = (PlayMode)_byteHandler.ReadInt(stream),
-				VictoryType = (VictoryType)_byteHandler.ReadInt(stream),
-				VictoryLimit = _byteHandler.ReadInt(stream),
-				OpponentType = (OpponentType)_byteHandler.ReadInt(stream),
-				RawResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
-				FuelResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
-				GoldResource = (ResourceLevelType)_byteHandler.ReadInt(stream),
-				AlienDerelicts = (AlienDerelictsType)_byteHandler.ReadInt(stream)
-			};
-		}
-
-		private void WriteGameOptions(Stream stream, GameOptionsSection gameOptions)
-		{
-			_byteHandler.WriteInt(stream, (int)gameOptions.World);
-			_byteHandler.WriteInt(stream, gameOptions.TurnTimer);
-			_byteHandler.WriteInt(stream, gameOptions.EndTurn);
-			_byteHandler.WriteInt(stream, gameOptions.StartGold);
-			_byteHandler.WriteInt(stream, (int)gameOptions.PlayMode);
-			_byteHandler.WriteInt(stream, (int)gameOptions.VictoryType);
-			_byteHandler.WriteInt(stream, gameOptions.VictoryLimit);
-			_byteHandler.WriteInt(stream, (int)gameOptions.OpponentType);
-			_byteHandler.WriteInt(stream, (int)gameOptions.RawResource);
-			_byteHandler.WriteInt(stream, (int)gameOptions.FuelResource);
-			_byteHandler.WriteInt(stream, (int)gameOptions.GoldResource);
-			_byteHandler.WriteInt(stream, (int)gameOptions.AlienDerelicts);
-		}
-		#endregion
-
-		#region Header
-		private GameFileHeader LoadGameFileHeader(Stream stream)
-		{
-			var header = new GameFileHeader
-			{
-				Version = (FileFormatVersion)_byteHandler.ReadShort(stream),
-				SaveFileType = (SaveFileType)_byteHandler.ReadByte(stream),
-				SaveGameName = _byteHandler.ReadCharArray(stream, 30).Trim('\0'),
-				PlanetType = (PlanetType)_byteHandler.ReadByte(stream),
-				MissionIndex = _byteHandler.ReadShort(stream)
-			};
-
-			for (var i = 1; i <= 4; i++)
-			{
-				header.TeamNames.Add(_byteHandler.ReadCharArray(stream, 30).Trim('\0'));
-			}
-
-			for (var i = 1; i <= 5; i++)
-			{
-				header.TeamTypes.Add((TeamType)_byteHandler.ReadByte(stream));
-			}
-
-			for (var i = 1; i <= 5; i++)
-			{
-				header.TeamClans.Add((TeamClan)_byteHandler.ReadByte(stream));
-			}
-
-			header.RngSeed = _byteHandler.ReadUInt32(stream);
-			header.OpponentType = (OpponentType)_byteHandler.ReadByte(stream);
-			header.TurnTimer = _byteHandler.ReadShort(stream);
-			header.EndTurn = _byteHandler.ReadShort(stream);
-			header.PlayMode = (PlayMode)_byteHandler.ReadByte(stream);
-
-			return header;
-		}
-
-		private void WriteGameFileHeader(Stream stream, GameFileHeader header)
-		{
-			_byteHandler.WriteShort(stream, (short)header.Version);
-			_byteHandler.WriteByte(stream, (byte)header.SaveFileType);
-			_byteHandler.WriteCharArray(stream, header.SaveGameName, 30);
-			_byteHandler.WriteByte(stream, (byte)header.PlanetType);
-			_byteHandler.WriteShort(stream, header.MissionIndex);
-
-			for (var i = 1; i <= 4; i++)
-			{
-				_byteHandler.WriteCharArray(stream, header.TeamNames[i - 1], 30);
-			}
-
-			for (var i = 1; i <= 5; i++)
-			{
-				_byteHandler.WriteByte(stream, (byte)header.TeamTypes[i - 1]);
-			}
-
-			for (var i = 1; i <= 5; i++)
-			{
-				_byteHandler.WriteByte(stream, (byte)header.TeamClans[i - 1]);
-			}
-
-			_byteHandler.WriteUInt32(stream, header.RngSeed);
-			_byteHandler.WriteByte(stream, (byte)header.OpponentType);
-			_byteHandler.WriteShort(stream, header.TurnTimer);
-			_byteHandler.WriteShort(stream, header.EndTurn);
-			_byteHandler.WriteByte(stream, (byte)header.PlayMode);
-		}
-		#endregion
-
-		private static void ValidateInput(SaveFileType saveFileType, string fileName)
-		{
-			if (saveFileType != SaveFileType.SinglePlayerCustomGame)
-			{
-				throw new NotImplementedException("Currently only single player custom games can be loaded");
-			}
-
-			ValidateFileName(fileName);
-		}
-
-		private static void ValidateFileName(string fileName)
-		{
-			if (string.IsNullOrEmpty(fileName) || !fileName.ToLower().EndsWith(".dta"))
-			{
-				throw new NotImplementedException("Currently only single player custom games can be loaded");
-			}
+			return path;
 		}
 	}
 }

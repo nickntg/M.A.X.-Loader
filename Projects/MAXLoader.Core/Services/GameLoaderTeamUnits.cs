@@ -118,7 +118,7 @@ namespace MAXLoader.Core.Services
 				ObjectIndex = ReadUShort(stream)
 			};
 
-			if (complex.ObjectIndex >= _lastIndex)
+			if (complex.ObjectIndex > _lastIndex)
 			{
 				_lastIndex = complex.ObjectIndex;
 				complex.ClassType = ReadUShort(stream);
@@ -185,7 +185,7 @@ namespace MAXLoader.Core.Services
 
 			var v = new UnitValue { ObjectIndex = index };
 
-			if (index >= _lastIndex)
+			if (index > _lastIndex)
 			{
 				_lastIndex = index;
 				v.ClassType = ReadUShort(stream);

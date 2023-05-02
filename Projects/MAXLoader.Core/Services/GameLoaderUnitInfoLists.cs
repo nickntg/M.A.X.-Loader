@@ -143,7 +143,7 @@ namespace MAXLoader.Core.Services
 			var index = ReadUShort(stream);
 			var ui = new UnitInfo { ObjectIndex = index };
 
-			if (index >= _lastIndex)
+			if (index > _lastIndex)
 			{
 				_lastIndex = index;
 

@@ -17,6 +17,7 @@ namespace MAXLoader.Core.Types
 		public UnitInfoList StationaryUnits { get; set; }
 		public UnitInfoList MobileAirUnits { get; set; }
 		public UnitInfoList Particles { get; set; }
+		public UnitInfoHashMap MapUnitInfo { get; set; }
 		public TheRest TheRest { get; set; }
 	}
 }

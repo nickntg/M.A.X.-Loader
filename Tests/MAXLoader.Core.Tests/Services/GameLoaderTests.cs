@@ -217,6 +217,18 @@ namespace MAXLoader.Core.Tests.Services
 		}
 
 		[Fact]
+		public void ParseUnitHashes()
+		{
+			var game = LoadGameFile();
+
+			Assert.Equal(512, game.MapUnitInfo.HashSize);
+			Assert.Equal(512, game.MapUnitInfo.Hashes.Count);
+
+			Assert.Equal(8, game.MapUnitInfo.Hashes[511].UnitInfoCount);
+			Assert.Equal(992, game.MapUnitInfo.Hashes[511].ObjectIndexes[7]);
+		}
+
+		[Fact]
 		public void WriteSameAsRead()
 		{
 			var loader = new GameLoader(new ByteHandler());

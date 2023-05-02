@@ -9,8 +9,9 @@ namespace MAXLoader.Core.Tests.Services
 {
 	public class GameLoaderTests
 	{
-		private const string GameFileLocation        = "../../../../../data/save1.dta";
-		private const string GameWrittenFileLocation = "../../../../../data/save1.rewritten.dta";
+		private const string GameFileLocation                = "../../../../../data/save1.dta";
+		private const string GameFileGreaterThanOnlyLocation = "../../../../../data/save_greater_than_only.dta";
+		private const string GameWrittenFileLocation         = "../../../../../data/save1.rewritten.dta";
 
 		[Theory]
 		[InlineData(SaveFileType.Text)]
@@ -229,6 +230,14 @@ namespace MAXLoader.Core.Tests.Services
 		}
 
 		[Fact]
+		public void ParseGameWhereGreaterThanOnlyBecomesNecessary()
+		{
+			var game = LoadGameFile(GameFileGreaterThanOnlyLocation);
+
+			Assert.NotNull(game);
+		}
+
+		[Fact]
 		public void WriteSameAsRead()
 		{
 			var loader = new GameLoader(new ByteHandler());
@@ -253,11 +262,11 @@ namespace MAXLoader.Core.Tests.Services
 			}
 		}
 
-		private static GameFile LoadGameFile()
+		private static GameFile LoadGameFile(string fileName = GameFileLocation)
 		{
 			var loader = new GameLoader(new ByteHandler());
 
-			return loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, GameFileLocation);
+			return loader.LoadGameFile(SaveFileType.SinglePlayerCustomGame, fileName);
 		}
 	}
 }

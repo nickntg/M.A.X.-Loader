@@ -194,6 +194,29 @@ namespace MAXLoader.Core.Tests.Services
 		}
 
 		[Fact]
+		public void ParseUnitInfos()
+		{
+			var game = LoadGameFile();
+
+			Assert.Equal(1590, game.GroundCoverUnits.UnitInfoCount);
+			Assert.Equal(2328, game.GroundCoverUnits.Units[1536].ObjectIndex);
+			Assert.Equal(UnitType.SmallTape, game.GroundCoverUnits.Units[1536].UnitType);
+
+			Assert.Equal(420, game.MobileLandSeaUnits.UnitInfoCount);
+			Assert.Equal(2320, game.MobileLandSeaUnits.Units[419].ObjectIndex);
+
+			Assert.Equal(1139, game.StationaryUnits.UnitInfoCount);
+			Assert.Equal(4209, game.StationaryUnits.Units[1138].ObjectIndex);
+			Assert.Equal(UnitType.ConcreteBlock, game.StationaryUnits.Units[1138].UnitType);
+
+			Assert.Equal(108, game.MobileAirUnits.UnitInfoCount);
+			Assert.Equal(4328, game.MobileAirUnits.Units[107].ObjectIndex);
+			Assert.Equal(UnitType.GroundAttackPlane, game.MobileAirUnits.Units[107].UnitType);
+
+			Assert.Equal(0, game.Particles.UnitInfoCount);
+		}
+
+		[Fact]
 		public void WriteSameAsRead()
 		{
 			var loader = new GameLoader(new ByteHandler());

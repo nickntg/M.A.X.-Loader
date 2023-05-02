@@ -42,7 +42,7 @@ namespace MAXLoader.Core.Services
 				EnemyHalt = ReadInt(stream)
 			};
 
-			Log.Debug($"LoadGameManagerState: start, stream position {stream.Position:X}");
+			Log.Debug($"LoadGameManagerState: end, stream position {stream.Position:X}");
 
 			return gmState;
 		}

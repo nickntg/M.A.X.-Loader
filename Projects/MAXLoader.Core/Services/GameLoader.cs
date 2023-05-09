@@ -44,6 +44,7 @@ namespace MAXLoader.Core.Services
 				Log.Debug("== Particles ==");
 				gameFile.Particles = LoadUnitInfoList(sr.BaseStream);
 				gameFile.MapUnitInfo = LoadUnitInfoHashMap(sr.BaseStream);
+				gameFile.HashMap = LoadHashMap(sr.BaseStream);
 				gameFile.TheRest = LoadTheRest(sr.BaseStream);
 			}
 
@@ -69,6 +70,7 @@ namespace MAXLoader.Core.Services
 				WriteUnitInfoList(sw.BaseStream, game.MobileAirUnits);
 				WriteUnitInfoList(sw.BaseStream, game.Particles);
 				WriteUnitInfoHashMap(sw.BaseStream, game.MapUnitInfo);
+				WriteHashMap(sw.BaseStream, game.HashMap);
 				WriteTheRest(sw.BaseStream, game.TheRest);
 			}
 		}
